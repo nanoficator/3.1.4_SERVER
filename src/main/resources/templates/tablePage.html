@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -9,7 +8,7 @@
 
 <body>
 
-    <td><a th:href="@{/logout}">LOGOUT</a></td>
+    <a th:href="@{/logout}">LOGOUT</a>
 
     <table border="0">
         <tr>
@@ -25,10 +24,10 @@
                     </thead>
                     <tbody>
                         <tr th:each="user : ${allUsers}">
-                            <td th:text="${user.id}"></td>
+                            <td th:utext="${user.id}"></td>
                             <td th:text="${user.username}"></td>
                             <td th:each="role : ${user.roles}">
-                                <p th:text="${role.name}"></p>
+                                <p th:text="*{role.name}"></p>
                             </td>
                             <td><a th:href="@{delete?{id}(id=${user.id})}">Delete</a> / <a th:href="@{edit?{id}(id=${user.id})}">Edit</a> / <a th:href="@{/user/info?{id}(id=${user.id})}">Info</a></td>
                         </tr>
@@ -40,9 +39,10 @@
         <tr>
             <td>
                 <table align="center" border="0">
-                    <td><a th:href="@{delete?id=0}">CLEAR DATA BASE</a></td>
-                    <td><a th:href="@{add}">ADD NEW USER</a></td>
+                    <td><a th:href="@{/admin/delete?id=0}">CLEAR DATA BASE</a></td>
+                    <td><a th:href="@{/admin/add}">ADD NEW USER</a></td>
                 </table>
+                <th:eac
             </td>
         </tr>
 

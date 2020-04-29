@@ -25,12 +25,23 @@ public class UserService {
         return userRepository.getOne(id);
     }
 
-    public User addNewUser(User user) {
-        return userRepository.save(user);
+    public String addNewUser(User user) {
+        if (!user.getPassword().equals(user.getConfirmPassword())) {
+            return "Error: passwords do not match!";
+        }
+        if (userRepository.findUserByUsername(user.getUsername()) != null) {
+            return "Error: username exists!";
+        }
+        userRepository.save(user);
+        return "Success: user " + user.getUsername() + " was added!";
     }
 
-    public void deleteUserById(Long id) {
+    public String deleteUserById(Long id) {
+        User user = userRepository.getOne(id);
         userRepository.deleteById(id);
+        return "Success: user " + user.getUsername() + " was deleted!";
     }
+
+
 
 }

@@ -19,9 +19,6 @@ public class Role {
     @ManyToMany (mappedBy = "roles", fetch = FetchType.EAGER)
     private List<User> users;
 
-    public Role() {
-    }
-
     public Long getId() {
         return id;
     }
@@ -34,8 +31,8 @@ public class Role {
         return name;
     }
 
-    public void setName(String roleName) {
-        this.name = roleName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<User> getUsers() {
