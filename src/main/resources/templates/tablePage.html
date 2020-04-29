@@ -9,7 +9,44 @@
 
 <body>
 
+    <td><a th:href="@{/logout}">LOGOUT</a></td>
 
+    <table border="0">
+        <tr>
+            <td>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Roles</th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="user : ${allUsers}">
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${user.username}"></td>
+                            <td th:each="role : ${user.roles}">
+                                <p th:text="${role.name}"></p>
+                            </td>
+                            <td><a th:href="@{delete?{id}(id=${user.id})}">Delete</a> / <a th:href="@{edit?{id}(id=${user.id})}">Edit</a> / <a th:href="@{/user/info?{id}(id=${user.id})}">Info</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <table align="center" border="0">
+                    <td><a th:href="@{delete?id=0}">CLEAR DATA BASE</a></td>
+                    <td><a th:href="@{add}">ADD NEW USER</a></td>
+                </table>
+            </td>
+        </tr>
+
+    </table>
 
 </body>
 </html>
