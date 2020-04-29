@@ -9,7 +9,7 @@
 
     <a th:href="@{/admin/table}">Back to table</a>
 
-    <form action="#" th:action="@{/admin/add}" th:object="${user}" method="post">
+    <form th:action="@{/admin/add}" th:object="${user}" method="post">
         <p>Username: <input type="text" name="username" th:value="*{username}" placeholder="Username" required></p>
         <p>Password: <input type="password" name="password" th:value="*{password}" placeholder="Password" required></p>
         <p>Confirm password: <input type="password" name="confirmPassword" th:value="*{confirmPassword}" placeholder="Confirm password" required></p>

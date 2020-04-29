@@ -6,7 +6,11 @@
 </head>
 <body>
 
-<p th:text="${message}"></p>
+    <a th:href="@{/logout}">LOGOUT</a>
+
+    <div th:text="${message}"></div>
+
+    <a th:href="@{/admin/table}">Back to table</a>
 
 </body>
 </html>

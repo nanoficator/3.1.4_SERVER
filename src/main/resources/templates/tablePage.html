@@ -29,7 +29,7 @@
                             <td th:each="role : ${user.roles}">
                                 <p th:text="*{role.name}"></p>
                             </td>
-                            <td><a th:href="@{delete?{id}(id=${user.id})}">Delete</a> / <a th:href="@{edit?{id}(id=${user.id})}">Edit</a> / <a th:href="@{/user/info?{id}(id=${user.id})}">Info</a></td>
+                            <td><a th:href="@{delete?id={id}(id=${user.id})}">Delete</a> / <a th:href="@{edit?id={id}(id=${user.id})}">Edit</a> / <a th:href="@{/user/info?id={id}(id=${user.id})}">Info</a></td>
                         </tr>
                     </tbody>
                 </table>

@@ -2,6 +2,7 @@ package crud.repository;
 
 import crud.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -9,6 +10,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query("SELECT u FROM User u WHERE u.username = :username")
+    @Query("SELECT user FROM User user WHERE user.username = :username")
     User findUserByUsername(@Param("username") String username);
+
+    @Modifying
+    @Query("UPDATE User user SET user = :user WHERE user.id = :id")
+    void updateUser(@Param("user") User user, @Param("id") Long id);
+
 }

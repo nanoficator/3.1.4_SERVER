@@ -25,7 +25,7 @@ public class UserService {
         return userRepository.getOne(id);
     }
 
-    public String addNewUser(User user) {
+    public String addUser(User user) {
         if (!user.getPassword().equals(user.getConfirmPassword())) {
             return "Error: passwords do not match!";
         }
