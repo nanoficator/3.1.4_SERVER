@@ -1,27 +1,29 @@
 package crud.controller;
 
-import crud.model.Role;
+import crud.model.Authority;
 import crud.model.User;
-import crud.service.RoleService;
+import crud.service.AuthorityService;
 import crud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
 public class UserController {
 
     private UserService userService;
-    private RoleService roleService;
+    private AuthorityService authorityService;
 
     @Autowired
-    public UserController(UserService userService, RoleService roleService) {
+    public UserController(UserService userService, AuthorityService authorityService) {
         this.userService = userService;
-        this.roleService = roleService;
+        this.authorityService = authorityService;
     }
 
     @GetMapping("/")
@@ -37,46 +39,71 @@ public class UserController {
 
     @GetMapping("/admin/add")
     public String addPage(Model model) {
-        model.addAttribute("allRoles", roleService.getAllRoles());
+        model.addAttribute("allRoles", authorityService.getAllAuthorities());
         model.addAttribute("user", new User());
         return "addPage";
     }
 
     @PostMapping("/admin/add")
-    public String addUser(Model model,
+    public String addUser(RedirectAttributes redirectAttributes,
                           @ModelAttribute("user") User user,
                           @ModelAttribute("ROLE_ADMIN") String roleAdmin,
                           @ModelAttribute("ROLE_USER") String roleUser) {
-        List<Role> roles = new ArrayList<>();
-        roles.add(roleService.getRoleByName(roleAdmin));
-        roles.add(roleService.getRoleByName(roleUser));
-        user.setRoles(roles);
-        model.addAttribute("message", userService.addUser(user));
+        List<Authority> roles = new ArrayList<>();
+        roles.add(authorityService.getAuthorityByName(roleAdmin));
+        roles.add(authorityService.getAuthorityByName(roleUser));
+        user.setAuthorities(roles);
+        redirectAttributes.addAttribute("message", userService.addUser(user));
         return "redirect:/result";
     }
 
     @GetMapping("/admin/delete")
-    public String deletePage(Model model,
+    public String deletePage(RedirectAttributes redirectAttributes,
+                             Model model,
                              @RequestParam Long id) {
         if (id == 0) {
             model.addAttribute("username", "all users");
         } else {
-            User userForDelete = userService.getUserById(id);
-            if (userForDelete == null) {
-                model.addAttribute("message", "Error: User does not exist!");
+            User user = userService.getUserById(id);
+            if (user == null) {
+                redirectAttributes.addAttribute("message", "Error: User does not exist!");
                 return "redirect:/result";
             } else {
                 model.addAttribute("id", id);
-                model.addAttribute("userName", userForDelete.getUsername());
+                model.addAttribute("username", user.getUsername());
             }
         }
         return "deletePage";
     }
 
     @PostMapping("/admin/delete")
-    public String deleteUser(Model model,
+    public String deleteUser(RedirectAttributes redirectAttributes,
                              @RequestParam Long id) {
-        model.addAttribute("message", userService.deleteUserById(id));
+        redirectAttributes.addAttribute("message", userService.deleteUserById(id));
+        return "redirect:/result";
+    }
+
+    @GetMapping("/admin/edit")
+    public String editPage(Model model,
+                           @RequestParam Long id) {
+        User user = userService.getUserById(id);
+        user.setPassword("");
+        Collection<Authority> allRoles = authorityService.getAllAuthorities();
+        model.addAttribute("allRoles", allRoles);
+        model.addAttribute("user", user);
+        return "editPage";
+    }
+
+    @PostMapping("/admin/edit")
+    public String editUser(@ModelAttribute("user") User user,
+                           @ModelAttribute("ROLE_ADMIN") String roleADmin,
+                           @ModelAttribute("ROLE_USER") String roleUser,
+                           RedirectAttributes redirectAttributes) {
+        List<Authority> roles = new ArrayList<>();
+        roles.add(authorityService.getAuthorityByName(roleADmin));
+        roles.add(authorityService.getAuthorityByName(roleUser));
+        user.setAuthorities(roles);
+        redirectAttributes.addAttribute("message", userService.changeUser(user));
         return "redirect:/result";
     }
 

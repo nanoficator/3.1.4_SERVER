@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<p>Are you sure to delete <div th:text="${username}"></div>?</p>
+<p>Are you sure to delete <span th:text="${username}"/>?</p>
     <form th:action="@{/admin/delete?id={id}(id=${id})}" method="post">
         <button>YES</button>
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">

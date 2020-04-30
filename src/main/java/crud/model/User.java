@@ -1,18 +1,20 @@
 package crud.model;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
-import java.util.List;
+import java.util.Collection;
 
 @Entity
 @Table (name = "users")
-public class User {
+public class User implements UserDetails {
 
     @Id
-    @Column (name = "user_id")
+    @Column (name = "user_id", updatable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column (unique = true)
     private String username;
 
     @Column
@@ -23,10 +25,22 @@ public class User {
 
     @Column
     @ManyToMany (fetch = FetchType.EAGER)
-    @JoinTable (name = "users_roles",
+    @JoinTable (name = "users_authorities",
             joinColumns = @JoinColumn (name = "user_id"),
-            inverseJoinColumns = @JoinColumn (name = "role_id"))
-    private List<Role> roles;
+            inverseJoinColumns = @JoinColumn (name = "authority_id"))
+    private Collection<Authority> authorities;
+
+    @Column (name = "is_account_non_expired")
+    private boolean isAccountNonExpired;
+
+    @Column (name = "is_account_non_locked")
+    private boolean isAccountNonLocked;
+
+    @Column (name = "is_credentials_non_expired")
+    private boolean isCredentialsNonExpired;
+
+    @Column (name = "is_enabled")
+    private boolean isEnabled;
 
     public Long getId() {
         return id;
@@ -36,6 +50,7 @@ public class User {
         this.id = id;
     }
 
+    @Override
     public String getUsername() {
         return username;
     }
@@ -44,6 +59,7 @@ public class User {
         this.username = username;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -60,11 +76,48 @@ public class User {
         this.confirmPassword = confirmPassword;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    @Override
+    public Collection<Authority> getAuthorities() {
+        return authorities;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setAuthorities(Collection<Authority> authorities) {
+        this.authorities = authorities;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return isAccountNonExpired;
+    }
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return isAccountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return isCredentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        isCredentialsNonExpired = credentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
     }
 }

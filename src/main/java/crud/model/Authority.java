@@ -1,23 +1,26 @@
 package crud.model;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table (name = "roles")
-public class Role {
+@Table (name = "authorities")
+public class Authority implements GrantedAuthority {
 
     @Id
-    @Column (name = "role_id")
+    @Column (name = "authority_id", updatable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column (unique = true)
     private String name;
 
     @Column
-    @ManyToMany (mappedBy = "roles", fetch = FetchType.EAGER)
-    private List<User> users;
+    @ManyToMany (mappedBy = "authorities", fetch = FetchType.EAGER)
+    private Collection<User> users;
 
     public Long getId() {
         return id;
@@ -35,7 +38,7 @@ public class Role {
         this.name = name;
     }
 
-    public List<User> getUsers() {
+    public Collection<User> getUsers() {
         return users;
     }
 
@@ -51,10 +54,15 @@ public class Role {
         if (obj == null || obj.getClass() != this.getClass()) {
             return false;
         }
-        Role objRole = (Role) obj;
+        Authority objRole = (Authority) obj;
         if (this.id.equals(objRole.id) && this.name.equals(objRole.name)) {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String getAuthority() {
+        return name.substring(5);
     }
 }

@@ -26,9 +26,7 @@
                         <tr th:each="user : ${allUsers}">
                             <td th:utext="${user.id}"></td>
                             <td th:text="${user.username}"></td>
-                            <td th:each="role : ${user.roles}">
-                                <p th:text="*{role.name}"></p>
-                            </td>
+                            <td><div th:each="role : ${user.roles}" th:text="*{role.getAuthority()}"/></td>
                             <td><a th:href="@{delete?id={id}(id=${user.id})}">Delete</a> / <a th:href="@{edit?id={id}(id=${user.id})}">Edit</a> / <a th:href="@{/user/info?id={id}(id=${user.id})}">Info</a></td>
                         </tr>
                     </tbody>
@@ -42,7 +40,6 @@
                     <td><a th:href="@{/admin/delete?id=0}">CLEAR DATA BASE</a></td>
                     <td><a th:href="@{/admin/add}">ADD NEW USER</a></td>
                 </table>
-                <th:eac
             </td>
         </tr>
 
