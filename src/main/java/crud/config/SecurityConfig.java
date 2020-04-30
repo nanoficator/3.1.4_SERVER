@@ -5,8 +5,10 @@ import crud.model.User;
 import crud.service.AuthorityService;
 import crud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -28,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserService userService;
     private AuthorityService authorityService;
+    PasswordEncoder passwordEncoder;
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -53,9 +56,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public SecurityConfig(UserService userService,
-                          AuthorityService authorityService) {
+                          AuthorityService authorityService,
+                          @Lazy PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.authorityService = authorityService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
