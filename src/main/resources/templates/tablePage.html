@@ -24,9 +24,9 @@
                     </thead>
                     <tbody>
                         <tr th:each="user : ${allUsers}">
-                            <td th:utext="${user.id}"></td>
+                            <td th:text="${user.id}"></td>
                             <td th:text="${user.username}"></td>
-                            <td><div th:each="role : ${user.roles}" th:text="*{role.getAuthority()}"/></td>
+                            <td><div th:each="authority : ${user.authorities}" th:text="${authority.getAuthority()}"/></td>
                             <td><a th:href="@{delete?id={id}(id=${user.id})}">Delete</a> / <a th:href="@{edit?id={id}(id=${user.id})}">Edit</a> / <a th:href="@{/user/info?id={id}(id=${user.id})}">Info</a></td>
                         </tr>
                     </tbody>

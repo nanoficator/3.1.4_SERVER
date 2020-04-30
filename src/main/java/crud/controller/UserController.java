@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.management.relation.Role;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -26,11 +27,6 @@ public class UserController {
         this.authorityService = authorityService;
     }
 
-    @GetMapping("/")
-    public String startPage() {
-        return "redirect:/login";
-    }
-
     @GetMapping("/admin/table")
     public String tablePage(Model model) {
         model.addAttribute("allUsers", userService.getAllUsers());
@@ -39,7 +35,7 @@ public class UserController {
 
     @GetMapping("/admin/add")
     public String addPage(Model model) {
-        model.addAttribute("allRoles", authorityService.getAllAuthorities());
+        model.addAttribute("allAuthorities", authorityService.getAllAuthorities());
         model.addAttribute("user", new User());
         return "addPage";
     }
@@ -49,10 +45,10 @@ public class UserController {
                           @ModelAttribute("user") User user,
                           @ModelAttribute("ROLE_ADMIN") String roleAdmin,
                           @ModelAttribute("ROLE_USER") String roleUser) {
-        List<Authority> roles = new ArrayList<>();
-        roles.add(authorityService.getAuthorityByName(roleAdmin));
-        roles.add(authorityService.getAuthorityByName(roleUser));
-        user.setAuthorities(roles);
+        Collection<Authority> authorities = new ArrayList<>();
+        authorities.add(authorityService.getAuthorityByName(roleAdmin));
+        authorities.add(authorityService.getAuthorityByName(roleUser));
+        user.setAuthorities(authorities);
         redirectAttributes.addAttribute("message", userService.addUser(user));
         return "redirect:/result";
     }

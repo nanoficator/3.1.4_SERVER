@@ -17,6 +17,19 @@
         <p>Role:
             <input th:each="role : ${allRoles}" th:if="${user.roles.contains(role)}" type="checkbox" th:name="${role.name}" th:value="${role.name}"  th:text="${role.name}" checked>
             <input th:each="role : ${allRoles}" th:if="${!user.roles.contains(role)}" type="checkbox" th:name="${role.name}" th:value="${role.name}"  th:text="${role.name}"></p>
+        <p>Is account non expired:
+            <input type="radio" th:field="*{accountNonExpired}" value="true">True
+            <input type="radio" th:field="*{accountNonExpired}" value="false">False</p>
+        <p>Is account non locked:
+            <input type="radio" th:field="*{accountNonLocked}" value="true">True
+            <input type="radio" th:field="*{accountNonLocked}" value="false">False</p>
+        <p>Is credentials non expired:
+            <input type="radio" th:field="*{credentialsNonExpired}" value="true">True
+            <input type="radio" th:field="*{credentialsNonExpired}" value="false">False</p>
+        <p>Is enabled:
+            <input type="radio" th:field="*{enabled}" value="true">True
+            <input type="radio" th:field="*{enabled}" value="false">False</p>
+        <p><input type="submit" value="ADD USER"></p>
         <p><input type="submit" name="SUBMIT" value="CHANGE USER"></p>
 
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
