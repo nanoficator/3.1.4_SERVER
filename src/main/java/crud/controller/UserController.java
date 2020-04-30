@@ -5,9 +5,7 @@ import crud.model.User;
 import crud.service.AuthorityService;
 import crud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -103,6 +101,13 @@ public class UserController {
         user.setAuthorities(roles);
         redirectAttributes.addAttribute("message", userService.changeUser(user));
         return "redirect:/result";
+    }
+
+    @GetMapping("/user/info")
+    public String infoPage(@Param("id") Long id,
+                           Model model) {
+        model.addAttribute(userService.getUserById(id));
+        return "infoPage";
     }
 
     @GetMapping("/result")
