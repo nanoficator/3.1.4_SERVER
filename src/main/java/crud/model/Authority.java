@@ -63,6 +63,6 @@ public class Authority implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return name.substring(5);
+        return name;
     }
 }
