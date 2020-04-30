@@ -6,6 +6,8 @@
 </head>
 <body>
 
+    <a th:href="@{/logout}">LOGOUT</a>
+
     <p>ID: <span th:text="${user.id}"/></p>
     <p>Username: <span th:text="${user.username}"/></p>
     <p>Role: <li th:each="authority : ${user.authorities}" th:text="${authority.name.substring(5)}"/> </p>
@@ -13,6 +15,8 @@
     <p>Account non locked: <span th:text="${user.accountNonLocked}"/></p>
     <p>Account non expired: <span th:text="${user.accountNonExpired}"/></p>
     <p>Account enabled: <span th:text="${user.enabled}"/></p>
+
+    <div th:if="${isAdmin}"><a th:href="@{/admin/table}">Back to table</a></div>
 
 </body>
 </html>
