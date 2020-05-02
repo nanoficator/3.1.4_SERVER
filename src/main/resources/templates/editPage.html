@@ -12,8 +12,8 @@
     <form th:action="@{/admin/edit}" th:object="${user}" method="post">
         <p>ID: <input type="text" name="id" th:value="*{id}" readonly></p>
         <p>Username: <input type="text" name="username" th:value="*{username}" required></p>
-        <p>Password: <input type="password" name="password" th:value="*{password}" required></p>
-        <p>Confirm password: <input type="password" name="confirmPassword" th:value="*{confirmPassword}" required></p>
+        <p>Password: <input type="password" name="password" th:value="*{password}"></p>
+        <p>Confirm password: <input type="password" name="confirmPassword" th:value="*{confirmPassword}"></p>
         <p>Role:
             <input th:each="authority : ${allAuthorities}" th:if="${user.authorities.contains(authority)}" type="checkbox" th:name="${authority.name}" th:value="${authority.name}"  th:text="${authority.name}" checked>
             <input th:each="authority : ${allAuthorities}" th:if="${!user.authorities.contains(authority)}" type="checkbox" th:name="${authority.name}" th:value="${authority.name}"  th:text="${authority.name}">
