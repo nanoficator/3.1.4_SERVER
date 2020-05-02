@@ -38,10 +38,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             User loggedInUser = (User) authentication.getPrincipal();
             Collection<Authority> authorities = loggedInUser.getAuthorities();
             if (authorities.contains(authorityService.getAuthorityByName("ROLE_ADMIN"))) {
-                httpServletResponse.sendRedirect("/admin/table");
+                httpServletResponse.sendRedirect("/admin");
             } else if (authorities.contains(authorityService.getAuthorityByName("ROLE_USER"))) {
-                Long id = userService.getUserByUsername(loggedInUser.getUsername()).getId();
-                httpServletResponse.sendRedirect("/user/info?id=" + id);
+                httpServletResponse.sendRedirect("/user");
             }
         };
     }
