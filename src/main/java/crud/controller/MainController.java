@@ -1,5 +1,6 @@
 package crud.controller;
 
+import crud.model.Authority;
 import crud.model.User;
 import crud.service.AuthorityService;
 import crud.service.UserService;
@@ -12,21 +13,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @Controller
-@RequestMapping("/admin")
-@PreAuthorize("hasRole('ROLE_ADMIN')")
-public class AdminController {
+@RequestMapping("/main")
+@PreAuthorize("hasAnyAuthority('ROLE_ADMIN', 'ROLE_USER')")
+public class MainController {
 
     private UserService userService;
     private AuthorityService authorityService;
 
-    public AdminController(UserService userService,
-                           AuthorityService authorityService) {
+    public MainController(UserService userService,
+                          AuthorityService authorityService) {
         this.userService = userService;
         this.authorityService = authorityService;
     }
 
     @GetMapping
-    public String adminPage(Model model) {
+    public String mainPage(Model model) {
         User authUser;
         try {
             authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -34,9 +35,13 @@ public class AdminController {
             return "redirect:/login";
         }
         Collection<User> allUsers = userService.getAllUsers();
+        Authority authorityAdmin = authorityService.getAuthorityByName("ROLE_ADMIN");
+        Authority authorityUser = authorityService.getAuthorityByName("ROLE_USER");
         model.addAttribute("allUsers", allUsers);
         model.addAttribute("authUser", authUser);
-        return "adminPage";
+        model.addAttribute("authorityAdmin", authorityAdmin);
+        model.addAttribute("authorityUser", authorityUser);
+        return "mainPage";
     }
 
 }
