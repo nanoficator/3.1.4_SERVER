@@ -1,6 +1,5 @@
 package crud.controller;
 
-import crud.model.Authority;
 import crud.model.User;
 import crud.service.AuthorityService;
 import crud.service.UserService;
@@ -9,8 +8,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collection;
 
 @Controller
 @RequestMapping("/main")
@@ -34,13 +31,16 @@ public class MainController {
         } catch (ClassCastException ex) {
             return "redirect:/login";
         }
-        Collection<User> allUsers = userService.getAllUsers();
-        Authority authorityAdmin = authorityService.getAuthorityByName("ROLE_ADMIN");
-        Authority authorityUser = authorityService.getAuthorityByName("ROLE_USER");
-        model.addAttribute("allUsers", allUsers);
+        boolean isAdmin = authUser.getAuthorities().contains(authorityService.getAuthorityByName("ROLE_ADMIN"));
+        boolean isUser = authUser.getAuthorities().contains(authorityService.getAuthorityByName("ROLE_USER"));
+        if (isAdmin) {
+            model.addAttribute("allUsers", userService.getAllUsers());
+        }
+        model.addAttribute("allAuthorities", authorityService.getAllAuthorities());
+        model.addAttribute("newUser", new User());
         model.addAttribute("authUser", authUser);
-        model.addAttribute("authorityAdmin", authorityAdmin);
-        model.addAttribute("authorityUser", authorityUser);
+        model.addAttribute("isAdmin", isAdmin);
+        model.addAttribute("isUser", isUser);
         return "mainPage";
     }
 

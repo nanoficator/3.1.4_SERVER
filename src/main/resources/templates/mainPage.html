@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
 
     <!-- Required meta tags -->
@@ -32,133 +32,200 @@
         </div>
     </nav>
 
-    <!--Buttons and tabs-->
+    <!--Buttons "Admin panel", "User info" and their tabs-->
+
     <div class="row">
-        <!--Buttons for tabs "Admin panel" and "User info"-->
-        <div class="col-1">
+        <div class="col-2">
             <div class="list-group">
-                <th th:if="${authUser.authorities.contains(authorityAdmin)}">
-                    <a class="list-group-item list-group-item-action" data-toggle="list" href="#admin-panel">Admin Panel</a>
+                <!--Button "Admin panel"-->
+                <th th:if="${isAdmin}">
+                    <a class="list-group-item active" data-toggle="list" href="#admin-panel">Admin Panel</a>
                 </th>
-                    <a class="list-group-item list-group-item-action active" data-toggle="list" href="#user-info">User info</a>
+                <!--Button "User info"-->
+                <th th:if="${isUser}">
+                    <a class="list-group-item" data-toggle="list" href="#user-info-panel">User info</a>
+                </th>
             </div>
         </div>
         <!--Tabs-->
-        <div class="col">
-            <div class="tab-content">
-                <!--Tab "Admin panel"-->
-                <div  th:if="${authUser.authorities.contains(authorityAdmin)}" class="tab-pane fade" id="admin-panel">
-                    <table class="table">
-                        <thead>
-                        <tr align="center">
-                            <th>ID</th>
-                            <th>Username</th>
-                            <th>Roles</th>
-                            <th>Account non expired</th>
-                            <th>Account non locked</th>
-                            <th>Credentials non expired</th>
-                            <th>Account enabled</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="user : ${allUsers}" align="center" valign="down">
-                            <td th:text="${user.id}"/>
-                            <td th:text="${user.username}"/>
-                            <td><div th:each="authority : ${user.authorities}" th:text="${authority.name.substring(5)}"/></td>
-                            <td>
-                                <form>
-                                    <input type="checkbox" disabled th:if="${user.accountNonExpired}" checked>
-                                </form>
-                            </td>
-                            <td>
-                                <form>
-                                    <input type="checkbox" disabled th:if="${user.accountNonLocked}" checked>
-                                </form>
-                            </td>
-                            <td>
-                                <form>
-                                    <input type="checkbox" disabled th:if="${user.credentialsNonExpired}" checked>
-                                </form>
-                            </td>
-                            <td>
-                                <form>
-                                    <input type="checkbox" disabled th:if="${user.isEnabled()}" checked>
-                                </form>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#edit-modal">Edit</button>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#delete-modal">Delete</button>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+        <div class="col" style="background: #eeeeee">
+                <div class="tab-content">
+                    <!--Tab "Admin panel"-->
+                    <div  th:if="${isAdmin}" class="tab-pane fade show active" id="admin-panel">
+                        <h1 class="card-title">Admin panel</h1>
+                        <!-- Buttons for tabs "Users table" & "New user"-->
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#users-table-tab" aria-selected="true">Users table</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#new-user-tab" aria-selected="false">New user</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <!--Tab "Users table"-->
+                            <div class="tab-pane fade show active" id="users-table-tab">
+                                <b><h4 class="card-header">All users</h4></b>
+                                <!--Users table-->
+                                <div class="card">
+                                    <table class="table">
+                                        <thead>
+                                        <tr align="center">
+                                            <th>ID</th>
+                                            <th>Username</th>
+                                            <th>Roles</th>
+                                            <th>Account non expired</th>
+                                            <th>Account non locked</th>
+                                            <th>Credentials non expired</th>
+                                            <th>Account enabled</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="user : ${allUsers}" align="center">
+                                            <td th:text="${user.id}"/>
+                                            <td th:text="${user.username}"/>
+                                            <td><div th:each="authority : ${user.authorities}" th:text="${authority.name.substring(5)}"/></td>
+                                            <td>
+                                                <form>
+                                                    <input type="checkbox" disabled th:if="${user.accountNonExpired}" checked>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form>
+                                                    <input type="checkbox" disabled th:if="${user.accountNonLocked}" checked>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form>
+                                                    <input type="checkbox" disabled th:if="${user.credentialsNonExpired}" checked>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form>
+                                                    <input type="checkbox" disabled th:if="${user.isEnabled()}" checked>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#edit-user-modal">Edit</button>
+                                                <!--Modal window "Edit user"-->
+                                                <div class="modal fade" id="edit-user-modal">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Edit user</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                ...
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#delete-user-modal">Delete</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--Tab "New user"-->
+                            <div class="tab-pane fade" id="new-user-tab"  align="center">
+                                <b><h4 class="card-header" align="left">Add new user</h4></b>
+                                <div class="card col-2" align="center">
+                                    <form th:action="@{/admin/add-user}" th:object="${newUser}" method="post">
+                                        <div class="form-group">
+                                            <label for="username" style="font-weight: bold">Username</label>
+                                            <input type="text" class="form-control" id="username" th:field="*{username}" placeholder="Enter username">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password" style="font-weight: bold">Password</label>
+                                            <input type="password" class="form-control" id="password" th:field="*{password}" placeholder="Enter password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="confirmPassword" style="font-weight: bold">Confirm password</label>
+                                            <input type="password" class="form-control" id="confirmPassword" th:field="*{confirmPassword}" placeholder="Re-enter password">
+                                        </div>
+                                        <select class="custom-select" multiple>Select Roles:
+                                            <option th:each="authority : ${allAuthorities}" th:value="${authority.name}" th:text="${authority.name.substring(5)}"/>
+                                        </select>
+                                        <div class="custom-control custom-switch" align="left">
+                                            <input type="checkbox" class="custom-control-input" id="accountNonExpired" th:field="*{accountNonExpired}">
+                                            <label class="custom-control-label" for="accountNonExpired" style="font-weight: bold">Is account non expired</label>
+                                        </div>
+                                        <div class="custom-control custom-switch" align="left">
+                                            <input type="checkbox" class="custom-control-input" id="accountNonLocked" th:field="*{accountNonLocked}">
+                                            <label class="custom-control-label" for="accountNonLocked" style="font-weight: bold">Is account non locked</label>
+                                        </div>
+                                        <div class="custom-control custom-switch" align="left">
+                                            <input type="checkbox" class="custom-control-input" id="credentialsNonExpired" th:field="*{credentialsNonExpired}">
+                                            <label class="custom-control-label" for="credentialsNonExpired" style="font-weight: bold">Is credentials non expired</label>
+                                        </div>
+                                        <div class="custom-control custom-switch" align="left">
+                                            <input type="checkbox" class="custom-control-input" id="enabled" th:field="*{enabled}">
+                                            <label class="custom-control-label" for="enabled" style="font-weight: bold">Is enabled</label>
+                                        </div>
+                                        <div>
+                                            <button type="submit" class="btn btn-outline-success">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Tab "User info"-->
+                    <div  th:if="${isUser}" class="tab-pane fade show" id="user-info-panel">
+                        <!--User info table-->
+                        <div class="card">
+                            <table class="table" id="info-user-table">
+                            <thead>
+                            <tr align="center">
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Roles</th>
+                                <th>Account non expired</th>
+                                <th>Account non locked</th>
+                                <th>Credentials non expired</th>
+                                <th>Account enabled</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr align="center">
+                                <td th:text="${authUser.id}"/>
+                                <td th:text="${authUser.username}"/>
+                                <td><div th:each="authority : ${authUser.authorities}" th:text="${authority.name.substring(5)}"/></td>
+                                <td>
+                                    <form>
+                                        <input type="checkbox" disabled th:if="${authUser.accountNonExpired}" checked>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form>
+                                        <input type="checkbox" disabled th:if="${authUser.accountNonLocked}" checked>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form>
+                                        <input type="checkbox" disabled th:if="${authUser.credentialsNonExpired}" checked>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form>
+                                        <input type="checkbox" disabled th:if="${authUser.isEnabled()}" checked>
+                                    </form>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
                 </div>
-                <!--Tab "User info"-->
-                <div th:if="${authUser.authorities.contains(authorityUser)}" class="tab-pane fade show active" id="user-info">
-                    <table class="table">
-                        <thead>
-                        <tr align="center">
-                            <th>ID</th>
-                            <th>Username</th>
-                            <th>Roles</th>
-                            <th>Account non expired</th>
-                            <th>Account non locked</th>
-                            <th>Credentials non expired</th>
-                            <th>Account enabled</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr align="center" valign="down">
-                            <td th:text="${authUser.id}"/>
-                            <td th:text="${authUser.username}"/>
-                            <td><div th:each="authority : ${authUser.authorities}" th:text="${authority.name.substring(5)}"/></td>
-                            <td>
-                                <form>
-                                    <input type="checkbox" disabled th:if="${authUser.accountNonExpired}" checked>
-                                </form>
-                            </td>
-                            <td>
-                                <form>
-                                    <input type="checkbox" disabled th:if="${authUser.accountNonLocked}" checked>
-                                </form>
-                            </td>
-                            <td>
-                                <form>
-                                    <input type="checkbox" disabled th:if="${authUser.credentialsNonExpired}" checked>
-                                </form>
-                            </td>
-                            <td>
-                                <form>
-                                    <input type="checkbox" disabled th:if="${authUser.isEnabled()}" checked>
-                                </form>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Modal window "Edit user"-->
-    <div class="modal fade" id="edit-modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit user</h5>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
         </div>
     </div>
 

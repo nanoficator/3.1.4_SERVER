@@ -42,6 +42,13 @@ public class User implements UserDetails {
     @Column (name = "is_enabled")
     private boolean isEnabled;
 
+    public User() {
+        this.isAccountNonExpired = true;
+        this.isAccountNonLocked = true;
+        this.isCredentialsNonExpired = true;
+        this.isEnabled = true;
+    }
+
     public Long getId() {
         return id;
     }
