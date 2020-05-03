@@ -91,7 +91,46 @@
                     </table>
                 </div>
                 <div class="tab-pane fade" id="user-info">
-                    2
+                    <table class="table">
+                        <thead>
+                        <tr align="center">
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Roles</th>
+                            <th>Account non expired</th>
+                            <th>Account non locked</th>
+                            <th>Credentials non expired</th>
+                            <th>Account enabled</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr align="center" valign="down">
+                            <td th:text="${authUser.id}"/>
+                            <td th:text="${authUser.username}"/>
+                            <td><div th:each="authority : ${authUser.authorities}" th:text="${authority.name.substring(5)}"/></td>
+                            <td>
+                                <form>
+                                    <input type="checkbox" disabled th:if="${authUser.accountNonExpired}" checked>
+                                </form>
+                            </td>
+                            <td>
+                                <form>
+                                    <input type="checkbox" disabled th:if="${authUser.accountNonLocked}" checked>
+                                </form>
+                            </td>
+                            <td>
+                                <form>
+                                    <input type="checkbox" disabled th:if="${authUser.credentialsNonExpired}" checked>
+                                </form>
+                            </td>
+                            <td>
+                                <form>
+                                    <input type="checkbox" disabled th:if="${authUser.isEnabled()}" checked>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
