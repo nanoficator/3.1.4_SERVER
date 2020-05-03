@@ -35,13 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     AuthenticationSuccessHandler authenticationSuccessHandler() {
         return (httpServletRequest, httpServletResponse, authentication) -> {
-            User loggedInUser = (User) authentication.getPrincipal();
-            Collection<Authority> authorities = loggedInUser.getAuthorities();
-            if (authorities.contains(authorityService.getAuthorityByName("ROLE_ADMIN"))) {
-                httpServletResponse.sendRedirect("/main");
-            } else if (authorities.contains(authorityService.getAuthorityByName("ROLE_USER"))) {
-                httpServletResponse.sendRedirect("/main");
-            }
+            httpServletResponse.sendRedirect("/main");
         };
     }
 
