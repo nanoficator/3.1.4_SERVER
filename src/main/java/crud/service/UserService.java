@@ -60,7 +60,7 @@ public class UserService implements UserDetailsService {
         return "Success: user " + user.getUsername() + " was deleted!";
     }
 
-    public String changeUser(User user) {
+    public String editUser(User user) {
         Long id = user.getId();
         String newUsername = user.getUsername();
         User userFromDbById = userRepository.findById(id).get();
