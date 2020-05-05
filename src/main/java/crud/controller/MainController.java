@@ -1,13 +1,18 @@
 package crud.controller;
 
+import crud.model.Authority;
 import crud.model.User;
 import crud.service.AuthorityService;
 import crud.service.UserService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/main")
@@ -16,11 +21,14 @@ public class MainController {
 
     private UserService userService;
     private AuthorityService authorityService;
+    private PasswordEncoder passwordEncoder;
 
     public MainController(UserService userService,
-                          AuthorityService authorityService) {
+                          AuthorityService authorityService,
+                          @Lazy PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.authorityService = authorityService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
@@ -38,6 +46,7 @@ public class MainController {
         }
         model.addAttribute("allAuthorities", authorityService.getAllAuthorities());
         model.addAttribute("newUser", new User());
+        model.addAttribute("newAuthorities", new ArrayList<Authority>());
         model.addAttribute("authUser", authUser);
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("isUser", isUser);

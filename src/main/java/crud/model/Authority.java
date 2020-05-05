@@ -19,7 +19,7 @@ public class Authority implements GrantedAuthority {
     private String name;
 
     @Column
-    @ManyToMany (mappedBy = "authorities", fetch = FetchType.EAGER)
+    @ManyToMany (mappedBy = "authorities")
     private Collection<User> users;
 
     public Long getId() {

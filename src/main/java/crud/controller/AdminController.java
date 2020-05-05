@@ -4,6 +4,7 @@ import crud.model.Authority;
 import crud.model.User;
 import crud.service.AuthorityService;
 import crud.service.UserService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,12 +30,7 @@ public class AdminController {
 
     @PostMapping("/add-user")
     public String addUser(@ModelAttribute("newUser") User newUser,
-                          @ModelAttribute("ROLE_ADMIN") String authorityAdmin,
-                          @ModelAttribute("ROLE_USER") String authorityUser) {
-        Collection<Authority> authorities = new ArrayList<>();
-        authorities.add(authorityService.getAuthorityByName(authorityAdmin));
-        authorities.add(authorityService.getAuthorityByName(authorityUser));
-        newUser.setAuthorities(authorities);
+                          @ModelAttribute("test") String test) {
         userService.addUser(newUser);
         return "redirect:/main";
     }
@@ -45,8 +41,8 @@ public class AdminController {
     }
 
     @PostMapping("/delete-user")
-    public String deleteUser(@ModelAttribute("deleteUser") User deleteUser) {
-        userService.deleteUserById(deleteUser.getId());
+    public String deleteUser(@Param("id") Long id) {
+        userService.deleteUserById(id);
         return "redirect:/main";
     }
 }

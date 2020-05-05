@@ -33,7 +33,6 @@
     </nav>
 
     <!--Buttons "Admin panel", "User info" and their tabs-->
-
     <div class="row">
         <div class="col-2">
             <div class="list-group">
@@ -51,7 +50,7 @@
         <div class="col" style="background: #eeeeee">
                 <div class="tab-content">
                     <!--Tab "Admin panel"-->
-                    <div  th:if="${isAdmin}" class="tab-pane fade show active" id="admin-panel">
+                    <div th:if="${isAdmin}" class="tab-pane fade show active" id="admin-panel">
                         <h1 class="card-title">Admin panel</h1>
                         <!-- Buttons for tabs "Users table" & "New user"-->
                         <ul class="nav nav-tabs">
@@ -89,22 +88,26 @@
                                             <td><div th:each="authority : ${user.authorities}" th:text="${authority.name.substring(5)}"/></td>
                                             <td>
                                                 <form>
-                                                    <input type="checkbox" disabled th:if="${user.accountNonExpired}" checked>
+                                                    <input th:if="${user.accountNonExpired}" type="checkbox" disabled checked>
+                                                    <input th:if="${!user.accountNonExpired}" type="checkbox" disabled>
                                                 </form>
                                             </td>
                                             <td>
                                                 <form>
-                                                    <input type="checkbox" disabled th:if="${user.accountNonLocked}" checked>
+                                                    <input th:if="${user.accountNonLocked}" type="checkbox" disabled checked>
+                                                    <input th:if="${!user.accountNonLocked}" type="checkbox" disabled>
                                                 </form>
                                             </td>
                                             <td>
                                                 <form>
-                                                    <input type="checkbox" disabled th:if="${user.credentialsNonExpired}" checked>
+                                                    <input th:if="${user.credentialsNonExpired}" type="checkbox" disabled checked>
+                                                    <input th:if="${!user.credentialsNonExpired}" type="checkbox" disabled>
                                                 </form>
                                             </td>
                                             <td>
                                                 <form>
-                                                    <input type="checkbox" disabled th:if="${user.isEnabled()}" checked>
+                                                    <input th:if="${user.enabled}" type="checkbox" disabled checked>
+                                                    <input th:if="${!user.enabled}" type="checkbox" disabled>
                                                 </form>
                                             </td>
                                             <td>
@@ -121,14 +124,59 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                                <button type="button" class="btn btn-primary">Save</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#delete-user-modal">Delete</button>
+                                                <button type="button" class="btn btn-danger"  data-toggle="modal" th:attr="data-target='#delete-user-'+ ${user.id} + '-modal'">Delete</button>
+                                                <!--Modal window "Delete user"-->
+                                                <div class="modal fade" th:id="'delete-user-' + ${user.id} + '-modal'">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Delete user</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form th:object="${user}" th:action="@{/admin/delete-user?id={id}(id=*{id})}" method="post">
+                                                                    <div class="form-group">
+                                                                        <label for="id-delete" style="font-weight: bold">ID</label>
+                                                                        <input type="text" class="form-control" id="id-delete" th:value="*{id}" readonly>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="username-delete" style="font-weight: bold">Username</label>
+                                                                        <input type="text" class="form-control" id="username-delete" th:value="*{username}" readonly>
+                                                                    </div>
+                                                                    <select class="custom-select" multiple>Roles:
+                                                                        <option th:each="authority : *{authorities}" th:text="${authority.name.substring(5)}"/>
+                                                                    </select>
+                                                                    <div class="custom-control custom-switch" align="left">
+                                                                        <input type="checkbox" class="custom-control-input" id="account-non-expired-delete" th:if="*{accountNonExpired}" checked>
+                                                                        <label class="custom-control-label" for="account-non-expired-delete" style="font-weight: bold">Is account non expired</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-switch" align="left">
+                                                                        <input type="checkbox" class="custom-control-input" id="account-non-locked-delete" th:if="*{accountNonLocked}" checked>
+                                                                        <label class="custom-control-label" for="account-non-locked-delete" style="font-weight: bold">Is account non locked</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-switch" align="left">
+                                                                        <input type="checkbox" class="custom-control-input" id="credentials-non-expired-delete" th:if="*{credentialsNonExpired}" checked>
+                                                                        <label class="custom-control-label" for="credentials-non-expired-delete" style="font-weight: bold">Is credentials non expired</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-switch" align="left">
+                                                                        <input type="checkbox" class="custom-control-input" id="enabled-delete" th:if="*{enabled}" checked>
+                                                                        <label class="custom-control-label" for="enabled-delete" style="font-weight: bold">Is enabled</label>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                        <button type="submit" class="btn btn-primary">Delete</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -152,9 +200,12 @@
                                             <label for="confirmPassword" style="font-weight: bold">Confirm password</label>
                                             <input type="password" class="form-control" id="confirmPassword" th:field="*{confirmPassword}" placeholder="Re-enter password">
                                         </div>
-                                        <select class="custom-select" multiple>Select Roles:
-                                            <option th:each="authority : ${allAuthorities}" th:value="${authority.name}" th:text="${authority.name.substring(5)}"/>
-                                        </select>
+                                        <div class="form-group">
+                                            <label for="authorities" style="font-weight: bold">Choose roles:</label>
+                                            <select class="custom-select" id="authorities" name="test" multiple>Select Roles:
+                                                <option th:each="authority : ${allAuthorities}" th:value="${authority.name}" th:text="${authority.name.substring(5)}"/>
+                                            </select>
+                                        </div>
                                         <div class="custom-control custom-switch" align="left">
                                             <input type="checkbox" class="custom-control-input" id="accountNonExpired" th:field="*{accountNonExpired}">
                                             <label class="custom-control-label" for="accountNonExpired" style="font-weight: bold">Is account non expired</label>
@@ -184,45 +235,45 @@
                         <!--User info table-->
                         <div class="card">
                             <table class="table" id="info-user-table">
-                            <thead>
-                            <tr align="center">
-                                <th>ID</th>
-                                <th>Username</th>
-                                <th>Roles</th>
-                                <th>Account non expired</th>
-                                <th>Account non locked</th>
-                                <th>Credentials non expired</th>
-                                <th>Account enabled</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr align="center">
-                                <td th:text="${authUser.id}"/>
-                                <td th:text="${authUser.username}"/>
-                                <td><div th:each="authority : ${authUser.authorities}" th:text="${authority.name.substring(5)}"/></td>
-                                <td>
-                                    <form>
-                                        <input type="checkbox" disabled th:if="${authUser.accountNonExpired}" checked>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form>
-                                        <input type="checkbox" disabled th:if="${authUser.accountNonLocked}" checked>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form>
-                                        <input type="checkbox" disabled th:if="${authUser.credentialsNonExpired}" checked>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form>
-                                        <input type="checkbox" disabled th:if="${authUser.isEnabled()}" checked>
-                                    </form>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
+                                <thead>
+                                    <tr align="center">
+                                        <th>ID</th>
+                                        <th>Username</th>
+                                        <th>Roles</th>
+                                        <th>Account non expired</th>
+                                        <th>Account non locked</th>
+                                        <th>Credentials non expired</th>
+                                        <th>Account enabled</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr align="center" th:object="${authUser}">
+                                        <td th:text="*{id}"/>
+                                        <td th:text="*{username}"/>
+                                        <td><div th:each="authority : *{authorities}" th:text="${authority.name.substring(5)}"/></td>
+                                        <td>
+                                            <form>
+                                                <input type="checkbox" disabled th:if="*{accountNonExpired}" checked>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form>
+                                                <input type="checkbox" disabled th:if="*{accountNonLocked}" checked>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form>
+                                                <input type="checkbox" disabled th:if="*{credentialsNonExpired}" checked>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form>
+                                                <input type="checkbox" disabled th:if="*{enabled}" checked>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
