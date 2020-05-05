@@ -120,11 +120,47 @@
                                                                 <h5 class="modal-title">Edit user</h5>
                                                             </div>
                                                             <div class="modal-body">
-                                                                ...
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                <button type="button" class="btn btn-primary">Save</button>
+                                                                <form th:object="${user}" th:action="@{/admin/edit-user?id={id}(id=*{id})}" method="post">
+                                                                    <div class="form-group">
+                                                                        <label for="id-edit" style="font-weight: bold">ID</label>
+                                                                        <input type="text" class="form-control" id="id-edit" th:value="*{id}" readonly>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="username-edit" style="font-weight: bold">Username</label>
+                                                                        <input type="text" class="form-control" id="username-edit" th:value="*{username}">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="password-edit" style="font-weight: bold">Password</label>
+                                                                        <input type="password" class="form-control" id="password-edit" th:value="*{password}">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="confirm-password-edit" style="font-weight: bold">Confirm password</label>
+                                                                        <input type="password" class="form-control" id="confirm-password-edit" th:value="*{confirmPassword}">
+                                                                    </div>
+                                                                    <select class="custom-select" multiple>Roles:
+                                                                        <option th:each="authority : *{authorities}" th:text="${authority.name.substring(5)}"/>
+                                                                    </select>
+                                                                    <div class="custom-control custom-switch" align="left">
+                                                                        <input type="checkbox" class="custom-control-input" id="account-non-expired-edit" th:if="*{accountNonExpired}" checked>
+                                                                        <label class="custom-control-label" for="account-non-expired-edit" style="font-weight: bold">Is account non expired</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-switch" align="left">
+                                                                        <input type="checkbox" class="custom-control-input" id="account-non-locked-edit" th:if="*{accountNonLocked}" checked>
+                                                                        <label class="custom-control-label" for="account-non-locked-edit" style="font-weight: bold">Is account non locked</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-switch" align="left">
+                                                                        <input type="checkbox" class="custom-control-input" id="credentials-non-expired-edit" th:if="*{credentialsNonExpired}" checked>
+                                                                        <label class="custom-control-label" for="credentials-non-expired-edit" style="font-weight: bold">Is credentials non expired</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-switch" align="left">
+                                                                        <input type="checkbox" class="custom-control-input" id="enabled-edit" th:if="*{enabled}" checked>
+                                                                        <label class="custom-control-label" for="enabled-edit" style="font-weight: bold">Is enabled</label>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                        <button type="submit" class="btn btn-primary">Confirm</button>
+                                                                    </div>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
