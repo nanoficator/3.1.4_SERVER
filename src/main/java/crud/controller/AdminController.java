@@ -37,12 +37,13 @@ public class AdminController {
 
     @PostMapping("/edit-user")
     public String editUser(@ModelAttribute("editUser") User user) {
-        userService.editUser(user);
+
         return "redirect:/main";
     }
 
     @PostMapping("/delete-user")
-    public String deleteUser(@Param("id") Long id) {
+    public String deleteUser(@Param("id") Long id,
+                             @ModelAttribute("userDelete") User user) {
         userService.deleteUserById(id);
         return "redirect:/main";
     }
