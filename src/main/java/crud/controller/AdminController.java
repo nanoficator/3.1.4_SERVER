@@ -36,8 +36,8 @@ public class AdminController {
     }
 
     @PostMapping("/edit-user")
-    public String editUser(@ModelAttribute("editUser") User editUser) {
-        editUser(editUser);
+    public String editUser(@ModelAttribute("editUser") User user) {
+        userService.editUser(user);
         return "redirect:/main";
     }
 

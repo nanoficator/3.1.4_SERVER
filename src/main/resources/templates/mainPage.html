@@ -238,8 +238,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="authorities" style="font-weight: bold">Choose roles:</label>
-                                            <select class="custom-select" id="authorities" name="test" multiple>Select Roles:
-                                                <option th:each="authority : ${allAuthorities}" th:value="${authority.name}" th:text="${authority.name.substring(5)}"/>
+                                            <select class="custom-select" id="authorities" th:field="*{authorities}" multiple>Select Roles:
+                                                <option th:each="authority : ${allAuthorities}" th:value="${{authority}}" th:text="${authority.name.substring(5)}"/>
                                             </select>
                                         </div>
                                         <div class="custom-control custom-switch" align="left">
