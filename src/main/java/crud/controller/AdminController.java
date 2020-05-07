@@ -25,14 +25,13 @@ public class AdminController {
     }
 
     @PostMapping("/add-user")
-    public String addUser(@ModelAttribute("newUser") User user,
-                          @ModelAttribute("test") String test) {
+    public String addUser(@ModelAttribute User user) {
         userService.addUser(user);
         return "redirect:/";
     }
 
     @PostMapping("/edit-user")
-    public String editUser(@ModelAttribute("editUser") User user) {
+    public String editUser(@ModelAttribute User user) {
         userService.editUser(user);
         return "redirect:/";
     }
