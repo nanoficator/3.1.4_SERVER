@@ -103,14 +103,36 @@
                                                                 <h5 class="modal-title">Delete user</h5>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form th:action="@{/admin/delete-user?id={id}(id=*{id})}" name="${userDelete}" method="post">
+                                                                <form th:action="@{/admin/delete-user?id={id}(id=*{id})}" name="${deleteUser}" method="post">
                                                                     <div class="form-group">
                                                                         <label for="id-delete" style="font-weight: bold">ID</label>
-                                                                        <input type="text" class="form-control" id="id-delete" th:value="*{id}">
+                                                                        <input type="text" class="form-control" id="id-delete" name="id" th:value="*{id}" disabled>
                                                                     </div>
                                                                     <div class="form-group">
                                                                         <label for="username-delete" style="font-weight: bold">Username</label>
-                                                                        <input type="text" class="form-control" id="username-delete" th:name="username" th:value="${user.username}">
+                                                                        <input type="text" class="form-control" id="username-delete" name="username" th:value="*{username}" disabled>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="authorities-delete" style="font-weight: bold">Roles:</label>
+                                                                        <select class="custom-select" id="authorities-delete" multiple disabled>Select Roles:
+                                                                            <option th:each="authority : *{authorities}" th:value="${{authority}}" th:text="${authority.name.substring(5)}"/>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="custom-control custom-switch" align="left">
+                                                                        <input type="checkbox" class="custom-control-input" id="accountNonExpired-delete" th:checked="*{accountNonExpired}" disabled>
+                                                                        <label class="custom-control-label" for="accountNonExpired-delete" style="font-weight: bold">Is account non expired</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-switch" align="left">
+                                                                        <input type="checkbox" class="custom-control-input" id="accountNonLocked-delete" th:checked="*{accountNonLocked}" disabled>
+                                                                        <label class="custom-control-label" for="accountNonLocked-delete" style="font-weight: bold">Is account non locked</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-switch" align="left">
+                                                                        <input type="checkbox" class="custom-control-input" id="credentialsNonExpired-delete" th:checked="*{credentialsNonExpired}" disabled>
+                                                                        <label class="custom-control-label" for="credentialsNonExpired-delete" style="font-weight: bold">Is credentials non expired</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-switch" align="left">
+                                                                        <input type="checkbox" class="custom-control-input" id="enabled-delete" th:checked="*{enabled}" disabled>
+                                                                        <label class="custom-control-label" for="enabled-delete" style="font-weight: bold">Is enabled</label>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

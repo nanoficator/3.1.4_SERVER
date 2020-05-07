@@ -1,6 +1,5 @@
 package crud.controller;
 
-import crud.model.Authority;
 import crud.model.User;
 import crud.service.AuthorityService;
 import crud.service.UserService;
@@ -10,9 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.ArrayList;
-import java.util.Collection;
 
 @Controller
 @RequestMapping("/admin")
@@ -29,9 +25,9 @@ public class AdminController {
     }
 
     @PostMapping("/add-user")
-    public String addUser(@ModelAttribute("newUser") User newUser,
+    public String addUser(@ModelAttribute("newUser") User user,
                           @ModelAttribute("test") String test) {
-        userService.addUser(newUser);
+        userService.addUser(user);
         return "redirect:/main";
     }
 
@@ -42,8 +38,7 @@ public class AdminController {
     }
 
     @PostMapping("/delete-user")
-    public String deleteUser(@Param("id") Long id,
-                             @ModelAttribute("userDelete") User user) {
+    public String deleteUser(@Param("id") Long id) {
         userService.deleteUserById(id);
         return "redirect:/main";
     }
