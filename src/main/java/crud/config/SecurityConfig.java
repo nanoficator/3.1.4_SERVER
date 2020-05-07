@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     AuthenticationSuccessHandler authenticationSuccessHandler() {
         return (httpServletRequest, httpServletResponse, authentication) -> {
-            httpServletResponse.sendRedirect("/main");
+            httpServletResponse.sendRedirect("/");
         };
     }
 

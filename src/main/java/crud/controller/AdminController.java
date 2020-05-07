@@ -28,18 +28,18 @@ public class AdminController {
     public String addUser(@ModelAttribute("newUser") User user,
                           @ModelAttribute("test") String test) {
         userService.addUser(user);
-        return "redirect:/main";
+        return "redirect:/";
     }
 
     @PostMapping("/edit-user")
     public String editUser(@ModelAttribute("editUser") User user) {
         userService.editUser(user);
-        return "redirect:/main";
+        return "redirect:/";
     }
 
     @PostMapping("/delete-user")
     public String deleteUser(@Param("id") Long id) {
         userService.deleteUserById(id);
-        return "redirect:/main";
+        return "redirect:/";
     }
 }
