@@ -91,7 +91,63 @@
                                             <td><input type="checkbox" disabled th:checked="*{credentialsNonExpired}"></td>
                                             <td><input type="checkbox" disabled th:checked="*{enabled}"></td>
                                             <td>
-                                                ...
+                                                <button type="button" class="btn btn-info"  data-toggle="modal" th:data-target="'#edit-user-' + *{id} + '-modal'">Edit</button>
+                                                <!--Modal window "Edit user"-->
+                                                <div class="modal fade" th:id="'edit-user-' + *{id} + '-modal'">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title">Delete user</h5>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <form th:action="@{/admin/edit-user?id={id}(id=*{id})}" method="post">
+                                                                    <div class="form-group">
+                                                                        <label for="id-edit" style="font-weight: bold">ID</label>
+                                                                        <input type="text" class="form-control" id="id-edit" name="id" th:value="${user.id}" disabled>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="username-edit" style="font-weight: bold">Username</label>
+                                                                        <input type="text" class="form-control" id="username-edit" name="username" th:value="${user.username}" placeholder="Type username">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="password-edit" style="font-weight: bold">Password</label>
+                                                                        <input type="text" class="form-control" id="password-edit"  name="password" value="" placeholder="Type new password if necessary">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="confirmPassword-edit" style="font-weight: bold">Confirm password</label>
+                                                                        <input type="text" class="form-control" id="confirmPassword-edit"  name="confirmPassword" value="" placeholder="Re-type new password">
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label for="authorities-edit" style="font-weight: bold">Roles:</label>
+                                                                        <select class="custom-select" id="authorities-edit" name="authorities" multiple>Select Roles:
+                                                                            <option th:each="authority : ${allAuthorities}" th:value="${{authority}}" th:selected="${user.authorities.contains(authority)}" th:text="${authority.name.substring(5)}"/>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="custom-control custom-switch" align="left">
+                                                                        <input type="checkbox" class="custom-control-input" id="accountNonExpired-edit" name="accountNonExpired" th:checked="${user.accountNonExpired}">
+                                                                        <label class="custom-control-label" for="accountNonExpired-edit" style="font-weight: bold">Is account non expired</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-switch" align="left">
+                                                                        <input type="checkbox" class="custom-control-input" id="accountNonLocked-edit" name="accountNonLocked" th:checked="${user.accountNonLocked}">
+                                                                        <label class="custom-control-label" for="accountNonLocked-edit" style="font-weight: bold">Is account non locked</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-switch" align="left">
+                                                                        <input type="checkbox" class="custom-control-input" id="credentialsNonExpired-edit" name="credentialsNonExpired" th:checked="${user.credentialsNonExpired}">
+                                                                        <label class="custom-control-label" for="credentialsNonExpired-edit" style="font-weight: bold">Is credentials non expired</label>
+                                                                    </div>
+                                                                    <div class="custom-control custom-switch" align="left">
+                                                                        <input type="checkbox" class="custom-control-input" id="enabled-edit" name="enabled" th:checked="${user.enabled}">
+                                                                        <label class="custom-control-label" for="enabled-edit" style="font-weight: bold">Is enabled</label>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                        <button type="submit" class="btn btn-info">Edit</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-danger"  data-toggle="modal" th:data-target="'#delete-user-' + ${user.id} + '-modal'">Delete</button>
@@ -136,7 +192,7 @@
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                        <button type="submit" class="btn btn-primary">Delete</button>
+                                                                        <button type="submit" class="btn btn-danger">Delete</button>
                                                                     </div>
                                                                 </form>
                                                             </div>

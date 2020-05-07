@@ -1,6 +1,5 @@
 package crud.controller;
 
-import crud.model.Authority;
 import crud.model.User;
 import crud.service.AuthorityService;
 import crud.service.UserService;
@@ -46,7 +45,7 @@ public class MainController {
         }
         model.addAttribute("allAuthorities", authorityService.getAllAuthorities());
         model.addAttribute("newUser", new User());
-        model.addAttribute("newAuthorities", new ArrayList<Authority>());
+        model.addAttribute("editUser", new User());
         model.addAttribute("authUser", authUser);
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("isUser", isUser);
