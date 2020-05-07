@@ -32,12 +32,7 @@ public class MainController {
 
     @GetMapping
     public String mainPage(Model model) {
-        User authUser;
-        try {
-            authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        } catch (ClassCastException ex) {
-            return "redirect:/login";
-        }
+        User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         boolean isAdmin = authUser.getAuthorities().contains(authorityService.getAuthorityByName("ROLE_ADMIN"));
         boolean isUser = authUser.getAuthorities().contains(authorityService.getAuthorityByName("ROLE_USER"));
         if (isAdmin) {
