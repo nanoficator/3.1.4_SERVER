@@ -44,10 +44,6 @@ public class User implements UserDetails {
     private boolean isEnabled;
 
     public User() {
-//        this.isAccountNonExpired = true;
-//        this.isAccountNonLocked = true;
-//        this.isCredentialsNonExpired = true;
-//        this.isEnabled = true;
     }
 
     public Long getId() {
