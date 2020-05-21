@@ -9,6 +9,7 @@
         <module name="3.1.1_SpringBoot" />
         <module name="3.1.2_Bootstrap" />
         <module name="CRUD_SpringBoot" />
+        <module name="3.1.3_REST" />
       </profile>
     </annotationProcessing>
   </component>
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="3.1.1_SpringBoot" options="-parameters" />
       <module name="3.1.2_Bootstrap" options="-parameters" />
+      <module name="3.1.3_REST" options="-parameters" />
       <module name="CRUD_SpringBoot" options="-parameters" />
     </option>
   </component>

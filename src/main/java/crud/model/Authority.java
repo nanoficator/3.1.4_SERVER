@@ -1,13 +1,8 @@
 package crud.model;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.List;
-
 @Entity
 @Table (name = "authorities")
 public class Authority implements GrantedAuthority {
@@ -19,10 +14,6 @@ public class Authority implements GrantedAuthority {
 
     @Column (unique = true)
     private String name;
-
-    @Column
-    @ManyToMany (mappedBy = "authorities")
-    private Collection<User> users;
 
     public Long getId() {
         return id;
@@ -38,14 +29,6 @@ public class Authority implements GrantedAuthority {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Collection<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
     }
 
     @Override
