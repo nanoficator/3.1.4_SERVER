@@ -302,15 +302,21 @@
         </div>
     </div>
 
-    <a class="list-group-item active" data-toggle="list" href="#click">Test</a>
-
-    <script id="test">
-        $('button').on('click', function() {
-            $.get('/test', function(user) {
-                console.log(user);
+    <input id="elem" type="button" value="Нажми меня!">
+    <script>
+        elem.onclick = function() {
+            alert('Info 1');
+            $.ajax({
+                url: "/test",
+                type: "GET",
+                success: function () {
+                    alert('Info 2');
+                }
             });
-        });
+        };
     </script>
+
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
