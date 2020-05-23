@@ -9,6 +9,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <title>
         Main page
     </title>
@@ -302,21 +304,18 @@
         </div>
     </div>
 
-    <input id="elem" type="button" value="Нажми меня!">
+    <button id="test">TEST</button>
     <script>
-        elem.onclick = function() {
-            alert('Info 1');
+        $('#test').on('click',
             $.ajax({
-                url: "/test",
-                type: "GET",
-                success: function () {
-                    alert('Info 2');
+                url: '/test',
+                type: 'GET',
+                success: function (data) {
+                    alert(data);
                 }
-            });
-        };
+            })
+        )
     </script>
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
