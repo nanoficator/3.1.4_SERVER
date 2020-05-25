@@ -1,9 +1,11 @@
-$(document).on('click', '#test', function () {
+$('#test').on('click', function () {
     $.ajax({
         url: '/test',
         type: 'get',
-        success: function () {
-            alert('2');
+        dataType: 'json',
+        success: function (data) {
+            alert('Done!');
+            $('#test-content').html(data);
         }
-    })
+    });
 });

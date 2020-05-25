@@ -5,13 +5,12 @@ import crud.service.AuthorityService;
 import crud.service.UserService;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("/admin")
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminController {
@@ -27,8 +26,8 @@ public class AdminController {
 
     @PostMapping("/add-user")
     public String addUser(@ModelAttribute User user) {
-        userService.addUser(user);
-        return "redirect:/";
+        String result = userService.addUser(user);
+        return result;
     }
 
     @PostMapping("/edit-user")
