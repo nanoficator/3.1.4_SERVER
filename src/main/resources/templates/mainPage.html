@@ -11,6 +11,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <script src="../javascripts/test.js"></script>
+
     <title>
         Main page
     </title>
@@ -305,17 +307,6 @@
     </div>
 
     <button id="test">TEST</button>
-    <script>
-        $('#test').on('click',
-            $.ajax({
-                url: '/test',
-                type: 'GET',
-                success: function (data) {
-                    alert(data);
-                }
-            })
-        )
-    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
