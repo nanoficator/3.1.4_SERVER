@@ -1,13 +1,9 @@
-$('#test').bind('click', function(){
-    alert('1');
+$(document).on('click', '#test', function () {
     $.ajax({
         url: '/test',
         type: 'get',
         success: function () {
-            alert('Success');
-        },
-        error: function () {
-            alert('Error');
+            alert('2');
         }
-    });
+    })
 });
