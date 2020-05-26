@@ -209,7 +209,7 @@
                             <div class="tab-pane fade" id="new-user-tab"  align="center">
                                 <b><h4 class="card-header" align="left">Add new user</h4></b>
                                 <div class="card col-2" align="center">
-                                    <form id="add-user-form" th:object="${newUser}">
+                                    <form th:action="@{/admin/add-user}" th:object="${newUser}" method="post">
                                         <div class="form-group">
                                             <label for="username-add" style="font-weight: bold">Username</label>
                                             <input type="text" class="form-control" id="username-add" th:field="*{username}" placeholder="Enter username">
@@ -245,7 +245,7 @@
                                             <label class="custom-control-label" for="enabled-add" style="font-weight: bold">Is enabled</label>
                                         </div>
                                         <div>
-                                            <button id="add-user-btn" type="submit" class="btn btn-outline-success">Submit</button>
+                                            <button type="submit" class="btn btn-outline-success">Submit</button>
                                         </div>
                                     </form>
                                 </div>
