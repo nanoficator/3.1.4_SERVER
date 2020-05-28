@@ -55,10 +55,10 @@
                         <!-- Buttons for tabs "Users table" & "New user"-->
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#users-table-tab" aria-selected="true">Users table</a>
+                                <a id="usersTableTabBtn" class="nav-link active" data-toggle="tab" href="#users-table-tab" aria-selected="true">Users table</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#new-user-tab" aria-selected="false">New user</a>
+                                <a id="addNewUserTabBtn" class="nav-link" data-toggle="tab" href="#new-user-tab" aria-selected="false">New user</a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -203,49 +203,65 @@
                                         </tr>
                                         </tbody>
                                     </table>
+                                    <table id="usersTable" class="table">
+                                        <thead>
+                                            <tr align="center">
+                                                <th>ID</th>
+                                                <th>Username</th>
+                                                <th>Roles</th>
+                                                <th>Account non expired</th>
+                                                <th>Account non locked</th>
+                                                <th>Credentials non expired</th>
+                                                <th>Account enabled</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody align="center"></tbody>
+                                    </table>
                                 </div>
                             </div>
                             <!--Tab "New user"-->
                             <div class="tab-pane fade" id="new-user-tab"  align="center">
                                 <b><h4 class="card-header" align="left">Add new user</h4></b>
                                 <div class="card col-2" align="center">
-                                    <form th:action="@{/admin/add-user}" th:object="${newUser}" method="post">
+                                    <form id="addUserForm">
                                         <div class="form-group">
-                                            <label for="username-add" style="font-weight: bold">Username</label>
-                                            <input type="text" class="form-control" id="username-add" th:field="*{username}" placeholder="Enter username">
+                                            <label for="addUsername" style="font-weight: bold">Username</label>
+                                            <input id="addUsername" type="text" name="username" class="form-control" placeholder="Enter username">
                                         </div>
                                         <div class="form-group">
-                                            <label for="password-add" style="font-weight: bold">Password</label>
-                                            <input type="password" class="form-control" id="password-add" th:field="*{password}" placeholder="Enter password">
+                                            <label for="addPassword" style="font-weight: bold">Password</label>
+                                            <input id="addPassword" type="password" name="password" class="form-control" placeholder="Enter password">
                                         </div>
                                         <div class="form-group">
-                                            <label for="confirmPassword-add" style="font-weight: bold">Confirm password</label>
-                                            <input type="password" class="form-control" id="confirmPassword-add" th:field="*{confirmPassword}" placeholder="Re-enter password">
+                                            <label for="addConfirmPassword" style="font-weight: bold">Confirm password</label>
+                                            <input id="addConfirmPassword" type="password"  name="confirmPassword" class="form-control" placeholder="Re-enter password">
                                         </div>
                                         <div class="form-group">
-                                            <label for="authorities-add" style="font-weight: bold">Choose roles:</label>
-                                            <select class="custom-select" id="authorities-add" th:field="*{authorities}" multiple>Select Roles:
+                                            <label for="addAuthorities" style="font-weight: bold">Choose roles:</label>
+                                            <select id="addAuthorities" name="authorities" class="custom-select" multiple>Select Roles:
                                                 <option th:each="authority : ${allAuthorities}" th:value="${{authority}}" th:text="${authority.name.substring(5)}"/>
                                             </select>
                                         </div>
                                         <div class="custom-control custom-switch" align="left">
-                                            <input type="checkbox" class="custom-control-input" id="accountNonExpired-add" th:field="*{accountNonExpired}">
-                                            <label class="custom-control-label" for="accountNonExpired-add" style="font-weight: bold">Is account non expired</label>
+                                            <input id="addAccountNonExpired" name="accountNonExpired" type="checkbox" class="custom-control-input">
+                                            <label class="custom-control-label" for="addAccountNonExpired" style="font-weight: bold">Is account non expired</label>
                                         </div>
                                         <div class="custom-control custom-switch" align="left">
-                                            <input type="checkbox" class="custom-control-input" id="accountNonLocked-add" th:field="*{accountNonLocked}">
-                                            <label class="custom-control-label" for="accountNonLocked-add" style="font-weight: bold">Is account non locked</label>
+                                            <input id="addAccountNonLocked" name="accountNonLocked" type="checkbox" class="custom-control-input">
+                                            <label class="custom-control-label" for="addAccountNonLocked" style="font-weight: bold">Is account non locked</label>
                                         </div>
                                         <div class="custom-control custom-switch" align="left">
-                                            <input type="checkbox" class="custom-control-input" id="credentialsNonExpired-add" th:field="*{credentialsNonExpired}">
-                                            <label class="custom-control-label" for="credentialsNonExpired-add" style="font-weight: bold">Is credentials non expired</label>
+                                            <input id="addCredentialsNonExpired" name="credentialsNonExpired" type="checkbox" class="custom-control-input">
+                                            <label class="custom-control-label" for="addCredentialsNonExpired" style="font-weight: bold">Is credentials non expired</label>
                                         </div>
                                         <div class="custom-control custom-switch" align="left">
-                                            <input type="checkbox" class="custom-control-input" id="enabled-add" th:field="*{enabled}">
-                                            <label class="custom-control-label" for="enabled-add" style="font-weight: bold">Is enabled</label>
+                                            <input id="addEnabled" name="enabled" type="checkbox" class="custom-control-input">
+                                            <label class="custom-control-label" for="addEnabled" style="font-weight: bold">Is enabled</label>
                                         </div>
                                         <div>
-                                            <button type="submit" class="btn btn-outline-success">Submit</button>
+                                            <button id="addUserBtn" type="button" class="btn btn-outline-success">Submit</button>
                                         </div>
                                     </form>
                                 </div>
@@ -302,16 +318,6 @@
         </div>
     </div>
 
-    <form method="post" id="ajax_form" action="" >
-        <input type="text" name="name" placeholder="NAME" /><br>
-        <input type="text" name="phonenumber" placeholder="YOUR PHONE" /><br>
-        <input type="button" id="btn" value="Отправить" />
-    </form>
-
-    <br>
-
-    <div id="result_form"></div>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -319,9 +325,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="text/javascript" th:src="@{/javascripts/test.js}"></script>
-    <script type="text/javascript" th:src="@{/javascripts/addUser.js}"></script>
-    <script type="text/javascript" th:src="@{/javascripts/ajax.js}"></script>
+    <script type="text/javascript" src="javascripts/addUser.js"></script>
+    <script type="text/javascript" src="javascripts/usersTable.js"></script>
+
+    <!-- For debugger-->
+    <script type="text/javascript" src="../static/javascripts/addUser.js"></script>
+    <script type="text/javascript" src="../static/javascripts/usersTable.js"></script>
+
 
 </body>
 </html>

@@ -1,10 +1,23 @@
-$('#add-user-form').submit(function () {
+$('#addUserBtn').on('click', function () {
+
+    let formdata = $("#addUserForm").serializeArray();
+    let user = {};
+    let authorities = {};
+    $(formdata).each(function(index, obj){
+        user[obj.name] = obj.value;
+    });
+
     $.ajax({
         url: '/admin/add-user',
         type: 'post',
-        data: $('#add-user-form').serialize(),
+        dataType: 'json',
+        data: user,
+        contentType: 'application/json',
         success: function () {
-            alert('1');
+            alert('success');
+        },
+        error: function () {
+            alert('error');
         }
     });
 });

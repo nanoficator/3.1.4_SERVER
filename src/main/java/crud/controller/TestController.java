@@ -3,6 +3,8 @@ package crud.controller;
 import crud.model.User;
 import crud.service.AuthorityService;
 import crud.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +25,9 @@ public class TestController {
     }
 
     @GetMapping
-    public User testPage() {
+    public ResponseEntity<User> testPage() {
         Long l = Long.parseLong("1");
         User user = userService.getUserById(l);
-        return user;
+        return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 }

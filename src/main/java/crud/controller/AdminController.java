@@ -4,11 +4,12 @@ import crud.model.User;
 import crud.service.AuthorityService;
 import crud.service.UserService;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/admin")
@@ -24,10 +25,14 @@ public class AdminController {
         this.authorityService = authorityService;
     }
 
-    @PostMapping("/add-user")
-    public String addUser(@ModelAttribute User user) {
+    @PostMapping(value = "/add-user",  produces = "application/json")
+    public ResponseEntity<User> addUser(@RequestBody User user) {
         String result = userService.addUser(user);
-        return result;
+        if (result.contains("Error")) {
+            return new ResponseEntity<User>(user, HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<User>(user, HttpStatus.OK);
+        }
     }
 
     @PostMapping("/edit-user")
@@ -40,5 +45,11 @@ public class AdminController {
     public String deleteUser(@Param("id") Long id) {
         userService.deleteUserById(id);
         return "redirect:/";
+    }
+
+    @GetMapping("/users-table")
+    public ResponseEntity<Collection<User>> allUsers() {
+        Collection<User> allUsers = userService.getAllUsers();
+        return new ResponseEntity<Collection<User>>(allUsers, HttpStatus.OK);
     }
 }
