@@ -1,5 +1,6 @@
 package crud.controller;
 
+import crud.model.Authority;
 import crud.model.User;
 import crud.service.AuthorityService;
 import crud.service.UserService;
@@ -51,5 +52,11 @@ public class AdminController {
     public ResponseEntity<Collection<User>> allUsers() {
         Collection<User> allUsers = userService.getAllUsers();
         return new ResponseEntity<Collection<User>>(allUsers, HttpStatus.OK);
+    }
+
+    @GetMapping("/authorities")
+    public ResponseEntity<Collection<Authority>> allAuthorities() {
+        Collection<Authority> allAuthorities = authorityService.getAllAuthorities();
+        return new ResponseEntity<Collection<Authority>>(allAuthorities, HttpStatus.OK);
     }
 }
