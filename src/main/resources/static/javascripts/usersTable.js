@@ -53,32 +53,48 @@ function updateUsersTable(allUsers, allAuthorities) {
                     return res;
                 }
             ),
-            $('<td>').append($('<input type="checkbox" disabled>').attr({
-                'checked' : user.accountNonExpired
-            })),
-            $('<td>').append($('<input type="checkbox" disabled>').attr({
-                'checked' : user.accountNonLocked
-            })),
-            $('<td>').append($('<input type="checkbox" disabled>').attr({
-                'checked' : user.credentialsNonExpired
-            })),
-            $('<td>').append($('<input type="checkbox" disabled>').attr({
-                'checked' : user.enabled
-            })),
-            $('<td>').append($('<button>').text('Edit').attr({
-                'type' : 'button',
-                'class' : 'btn btn-info',
-                'data-toggle' : 'modal',
-                'data-target' : '#edit-user-modal'
-            }))
-                .data('user', user),
-            $('<td>').append($('<button>').text('Delete').attr({
-                'type': 'button',
-                'class': 'btn btn-danger',
-                'data-toggle': 'modal',
-                'data-target': '#delete-user-modal',
-            }))
-                .data('user', user),
+            $('<td>')
+                .append($('<input type="checkbox" disabled>')
+                    .attr({
+                        'checked': user.accountNonExpired
+                    })),
+            $('<td>')
+                .append($('<input type="checkbox" disabled>')
+                    .attr({
+                        'checked': user.accountNonLocked
+                    })),
+            $('<td>')
+                .append($('<input type="checkbox" disabled>')
+                    .attr({
+                        'checked': user.credentialsNonExpired
+                    })),
+            $('<td>')
+                .append($('<input type="checkbox" disabled>')
+                    .attr({
+                        'checked': user.enabled
+                    })),
+            $('<td>')
+                .append($('<button>')
+                    .text('Edit')
+                    .attr({
+                        'type': 'button',
+                        'class': 'btn btn-info',
+                        'data-toggle': 'modal',
+                        'data-target': '#edit-user-modal'
+                    })
+                    .data('user', user)
+                ),
+            $('<td>')
+                .append($('<button>')
+                    .text('Delete')
+                    .attr({
+                        'type': 'button',
+                        'class': 'btn btn-danger',
+                        'data-toggle': 'modal',
+                        'data-target': '#delete-user-modal',
+                    })
+                    .data('user', JSON.stringify(user))
+            )
         )
     })
 }
