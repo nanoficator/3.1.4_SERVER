@@ -1,12 +1,12 @@
 $(function () {
-    updateTable(
+    updateUsersTable(
         getAllUsers(),
         getAllAuthorities()
     );
 });
 
 $('#usersTableTabBtn').on('click', function () {
-    updateTable(
+    updateUsersTable(
         getAllUsers(),
         getAllAuthorities()
     );
@@ -38,10 +38,10 @@ function getAllAuthorities() {
     return allAuthorities;
 }
 
-function updateTable(allUsers, allAuthorities) {
+function updateUsersTable(allUsers, allAuthorities) {
     $('#users-table tbody').html('');
     $(allUsers).each(function (i, user) {
-        $('#users-table tbody').append($('<tr>')).append(
+        $('#users-table tbody').append($('<tr>').attr({'id' : 'row-' + user.id})).append(
             $('<td>').text(user.id),
             $('<td>').text(user.username),
             $('<td>').text(
@@ -49,7 +49,7 @@ function updateTable(allUsers, allAuthorities) {
                     let res = '';
                     $(user.authorities).each(function (j, authority) {
                         res += authority.name.substring(5) + ' ';
-                    })
+                    });
                     return res;
                 }
             ),
@@ -69,14 +69,14 @@ function updateTable(allUsers, allAuthorities) {
                 'type' : 'button',
                 'class' : 'btn btn-info',
                 'data-toggle' : 'modal',
-                'data-target' : "#edit-user-modal"
+                'data-target' : '#edit-user-modal'
             }))
                 .data('user', user),
             $('<td>').append($('<button>').text('Delete').attr({
                 'type': 'button',
                 'class': 'btn btn-danger',
                 'data-toggle': 'modal',
-                'data-target': "#delete-user-modal"
+                'data-target': '#delete-user-modal',
             }))
                 .data('user', user),
         )

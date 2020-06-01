@@ -182,6 +182,55 @@
         </div>
     </div>
 
+    <!--Modal window "Delete user"-->
+    <div class="modal fade" id="delete-user-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete user</h5>
+                </div>
+                <div class="modal-body">
+                    <form action="/admin/delete-user" method="post">
+                        <div class="form-group">
+                            <label for="id-delete" style="font-weight: bold">ID</label>
+                            <input type="text" class="form-control" id="id-delete" name="id" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="username-delete" style="font-weight: bold">Username</label>
+                            <input type="text" class="form-control" id="username-delete" name="username" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="authorities-delete" style="font-weight: bold">Roles:</label>
+                            <select class="custom-select" id="authorities-delete" multiple disabled>Select Roles:
+                                <option/>
+                            </select>
+                        </div>
+                        <div class="custom-control custom-switch" align="left">
+                            <input type="checkbox" class="custom-control-input" id="accountNonExpired-delete" disabled>
+                            <label class="custom-control-label" for="accountNonExpired-delete" style="font-weight: bold">Is account non expired</label>
+                        </div>
+                        <div class="custom-control custom-switch" align="left">
+                            <input type="checkbox" class="custom-control-input" id="accountNonLocked-delete" disabled>
+                            <label class="custom-control-label" for="accountNonLocked-delete" style="font-weight: bold">Is account non locked</label>
+                        </div>
+                        <div class="custom-control custom-switch" align="left">
+                            <input type="checkbox" class="custom-control-input" id="credentialsNonExpired-delete" disabled>
+                            <label class="custom-control-label" for="credentialsNonExpired-delete" style="font-weight: bold">Is credentials non expired</label>
+                        </div>
+                        <div class="custom-control custom-switch" align="left">
+                            <input type="checkbox" class="custom-control-input" id="enabled-delete" disabled>
+                            <label class="custom-control-label" for="enabled-delete" style="font-weight: bold">Is enabled</label>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -192,6 +241,7 @@
     <div th:if="${isAdmin}">
         <script type="text/javascript" src="javascripts/addUser.js"></script>
         <script type="text/javascript" src="javascripts/usersTable.js"></script>
+        <script type="text/javascript" src="javascripts/deleteUser.js"></script>
     </div>
 
 </body>
