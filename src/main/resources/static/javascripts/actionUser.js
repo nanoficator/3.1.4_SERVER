@@ -1,9 +1,9 @@
 $('#modal-button').on('click', function (event) {
     let action = event.target.attributes.name.nodeValue;
     let formData = $("#user-form").serializeArray();
-    let data = {};
+    let user = {};
     $(formData).each(function(index, obj){
-        data[obj.name] = obj.value;
+        user[obj.name] = obj.value;
     });
     if (action == 'delete') {
         deleteUser(user);
