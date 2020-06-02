@@ -59,4 +59,9 @@ function deleteUser(user) {
             'checked': user.enabled,
             'disabled': true,
         });
+    $('#user-form :submit')
+        .text('Delete')
+        .attr({
+            'class': 'btn btn-danger',
+        })
 }
