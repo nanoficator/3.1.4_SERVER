@@ -1,11 +1,11 @@
 $('#modal-button').on('click', function (event) {
     let action = event.target.attributes.name.nodeValue;
+    let formData = $("#user-form").serializeArray();
+    let data = {};
+    $(formData).each(function(index, obj){
+        data[obj.name] = obj.value;
+    });
     if (action == 'delete') {
-        let formdata = $("#user-form").serializeArray();
-        let data = {};
-        $(formdata).each(function(index, obj){
-            data[obj.name] = obj.value;
-        });
         deleteUser(user);
     } else if (action == 'edit') {
         editUser(user);
