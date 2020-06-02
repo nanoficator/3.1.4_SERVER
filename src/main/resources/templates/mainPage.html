@@ -182,44 +182,50 @@
         </div>
     </div>
 
-    <!--Modal window "Delete user"-->
-    <div class="modal fade" id="delete-user-modal">
+    <!--Modal window for User-->
+    <div class="modal fade" id="user-modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Delete user</h5>
+                    <h5 class="modal-title"></h5>
                 </div>
                 <div class="modal-body">
-                    <form action="/admin/delete-user" method="post">
+                    <form id="user-form">
                         <div class="form-group">
-                            <label for="id-delete" style="font-weight: bold">ID</label>
-                            <input type="text" class="form-control" id="id-delete" name="id" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label for="username-delete" style="font-weight: bold">Username</label>
-                            <input type="text" class="form-control" id="username-delete" name="username" disabled>
+                            <label for="user-id" style="font-weight: bold">ID</label>
+                            <input type="text" class="form-control" id="user-id" name="id">
                         </div>
                         <div class="form-group">
-                            <label for="authorities-delete" style="font-weight: bold">Roles:</label>
-                            <select class="custom-select" id="authorities-delete" multiple disabled>Select Roles:
-                                <option/>
-                            </select>
+                            <label for="user-username" style="font-weight: bold">Username</label>
+                            <input type="text" class="form-control" id="user-username" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-password" style="font-weight: bold">Password</label>
+                            <input type="password" class="form-control" id="user-password" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-confirmPassword" style="font-weight: bold">Confirm password</label>
+                            <input type="password" class="form-control" id="user-confirmPassword" name="confirmPassword">
+                        </div>
+                        <div class="form-group">
+                            <label for="user-authorities" style="font-weight: bold">Roles:</label>
+                            <select class="custom-select" id="user-authorities" name="authorities" multiple></select>
                         </div>
                         <div class="custom-control custom-switch" align="left">
-                            <input type="checkbox" class="custom-control-input" id="accountNonExpired-delete" disabled>
-                            <label class="custom-control-label" for="accountNonExpired-delete" style="font-weight: bold">Is account non expired</label>
+                            <input type="checkbox" class="custom-control-input" id="user-accountNonExpired">
+                            <label class="custom-control-label" for="user-accountNonExpired" style="font-weight: bold">Is account non expired</label>
                         </div>
                         <div class="custom-control custom-switch" align="left">
-                            <input type="checkbox" class="custom-control-input" id="accountNonLocked-delete" disabled>
-                            <label class="custom-control-label" for="accountNonLocked-delete" style="font-weight: bold">Is account non locked</label>
+                            <input type="checkbox" class="custom-control-input" id="user-accountNonLocked">
+                            <label class="custom-control-label" for="user-accountNonLocked" style="font-weight: bold">Is account non locked</label>
                         </div>
                         <div class="custom-control custom-switch" align="left">
-                            <input type="checkbox" class="custom-control-input" id="credentialsNonExpired-delete" disabled>
-                            <label class="custom-control-label" for="credentialsNonExpired-delete" style="font-weight: bold">Is credentials non expired</label>
+                            <input type="checkbox" class="custom-control-input" id="user-credentialsNonExpired">
+                            <label class="custom-control-label" for="user-credentialsNonExpired" style="font-weight: bold">Is credentials non expired</label>
                         </div>
                         <div class="custom-control custom-switch" align="left">
-                            <input type="checkbox" class="custom-control-input" id="enabled-delete" disabled>
-                            <label class="custom-control-label" for="enabled-delete" style="font-weight: bold">Is enabled</label>
+                            <input type="checkbox" class="custom-control-input" id="user-enabled">
+                            <label class="custom-control-label" for="user-enabled" style="font-weight: bold">Is enabled</label>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

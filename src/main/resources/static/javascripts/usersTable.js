@@ -80,7 +80,7 @@ function updateUsersTable(allUsers, allAuthorities) {
                         'type': 'button',
                         'class': 'btn btn-info',
                         'data-toggle': 'modal',
-                        'data-target': '#edit-user-modal'
+                        'data-target': '#user-modal'
                     })
                     .data('user', user)
                 ),
@@ -91,7 +91,7 @@ function updateUsersTable(allUsers, allAuthorities) {
                         'type': 'button',
                         'class': 'btn btn-danger',
                         'data-toggle': 'modal',
-                        'data-target': '#delete-user-modal',
+                        'data-target': '#user-modal',
                     })
                     .data('user', user)
                 )
