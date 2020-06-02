@@ -1,5 +1,14 @@
-$('#user-modal').on('show.bs.modal', function () {
-    let user = $('#user-modal').data('bs.modal')._config.user;
+$('#user-modal').on('show.bs.modal', function (event) {
+    let user = $(event.relatedTarget).data('user');
+    let action = $(event.relatedTarget).data('action');
+    if (action == 'delete') {
+        deleteUser(user);
+    } else if (action == 'edit') {
+        editUser(user);
+    }
+});
+
+function deleteUser(user) {
     $('#user-modal .modal-title').text('Delete User');
     $('#user-id')
         .attr({
@@ -22,17 +31,14 @@ $('#user-modal').on('show.bs.modal', function () {
     $('#user-authorities')
         .attr({
             'disabled': true,
-        });
-
-    // $('#user-authorities')
-    //     .append(
-    //         $(user.authorities).each(function (i, authority) {
-    //             return $('<option>').text(authority.name.substring(5));
-    //         })
-    //     )
-    //     .attr({
-    //         'disabled': true
-    //     });
+        })
+        $('#user-authorities').html('');
+        $(user.authorities).each(function (i, authority) {
+                $('#user-authorities').append(
+                    $('<option>')
+                        .text(authority.name.substring(5))
+                )
+            })
     $('#user-accountNonExpired')
         .attr({
             'checked': user.accountNonExpired,
@@ -53,4 +59,4 @@ $('#user-modal').on('show.bs.modal', function () {
             'checked': user.enabled,
             'disabled': true,
         });
-});
+}
