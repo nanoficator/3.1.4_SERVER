@@ -6,13 +6,13 @@ $('#user-form').submit(
         $(formData).each(function (index, obj) {
             user[obj.name] = obj.value;
         });
-        let action;
+        let action = '';
         if (action == 'delete') {
             deleteUser(user);
         } else if (action == 'edit') {
             editUser(user);
         }
-        $('#user-modal').modal('hide');
+        $('#modal-window').modal('hide');
     }
 )
 
