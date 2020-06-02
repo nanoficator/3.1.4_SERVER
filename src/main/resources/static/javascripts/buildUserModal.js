@@ -62,7 +62,7 @@ function deleteUserModal(user) {
             'checked': user.enabled,
             'disabled': true,
         });
-    $('#modal-button')
+    $('#user-form :submit')
         .text('Delete')
         .attr({
             'class': 'btn btn-danger',
