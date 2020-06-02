@@ -94,7 +94,7 @@ function updateUsersTable(allUsers, allAuthorities) {
                         'data-target': '#delete-user-modal',
                     })
                     .data('user', user)
-            )
+                )
         )
     })
 }

@@ -1,4 +1,4 @@
 $('#delete-user-modal').on('show.bs.modal', function (event) {
-    let button = $(event.relatedTarget);
-    let user = button.data;
+    let user = $('#delete-user-modal').data('bs.modal')._config.user;
+
 });
