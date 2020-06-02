@@ -229,7 +229,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit"></button>
+                            <button type="button" id="modal-button"></button>
                         </div>
                     </form>
                 </div>
@@ -244,6 +244,7 @@
     <div th:if="${isAdmin}">
         <script type="text/javascript" src="javascripts/addUser.js"></script>
         <script type="text/javascript" src="javascripts/usersTable.js"></script>
+        <script type="text/javascript" src="javascripts/buildUserModal.js"></script>
         <script type="text/javascript" src="javascripts/actionUser.js"></script>
     </div>
 

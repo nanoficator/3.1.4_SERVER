@@ -43,9 +43,9 @@ public class AdminController {
     }
 
     @PostMapping("/delete-user")
-    public String deleteUser(@Param("id") Long id) {
-        userService.deleteUserById(id);
-        return "redirect:/";
+    public ResponseEntity<String> deleteUser(@RequestBody User user) {
+//        userService.deleteUserById(id);
+        return new ResponseEntity<String >("test", HttpStatus.OK);
     }
 
     @GetMapping("/users-table")
