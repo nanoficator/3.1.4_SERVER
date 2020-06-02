@@ -1,4 +1,4 @@
-$('#user-modal').on('show.bs.modal', function (event) {
+$('#modal-window').on('show.bs.modal', function (event) {
     let user = $(event.relatedTarget).data('user');
     let action = $(event.relatedTarget).data('action');
     if (action == 'delete') {
@@ -9,7 +9,14 @@ $('#user-modal').on('show.bs.modal', function (event) {
 });
 
 function deleteUserModal(user) {
-    $('#user-modal .modal-title').text('Delete User');
+    $('#modal-window .modal-title').text('Delete User');
+    $('#modal-window .modal-body')
+        .append(
+            $('#user-form')
+                .attr({
+                    'hidden' : false
+                })
+        );
     $('#user-id')
         .attr({
             'value': user.id,

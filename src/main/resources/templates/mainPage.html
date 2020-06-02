@@ -183,59 +183,60 @@
     </div>
 
     <!--Modal window for User-->
-    <div class="modal fade" id="user-modal">
+    <div class="modal fade" id="modal-window">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title"></h5>
                 </div>
-                <div class="modal-body">
-                    <form id="user-form">
-                        <div class="form-group">
-                            <label for="user-id" style="font-weight: bold">ID</label>
-                            <input type="text" class="form-control" id="user-id" name="id">
-                        </div>
-                        <div class="form-group">
-                            <label for="user-username" style="font-weight: bold">Username</label>
-                            <input type="text" class="form-control" id="user-username" name="username">
-                        </div>
-                        <div class="form-group">
-                            <label for="user-password" style="font-weight: bold">Password</label>
-                            <input type="password" class="form-control" id="user-password" name="password">
-                        </div>
-                        <div class="form-group">
-                            <label for="user-confirmPassword" style="font-weight: bold">Confirm password</label>
-                            <input type="password" class="form-control" id="user-confirmPassword" name="confirmPassword">
-                        </div>
-                        <div class="form-group">
-                            <label for="user-authorities" style="font-weight: bold">Roles:</label>
-                            <select class="custom-select" id="user-authorities" name="authorities" multiple></select>
-                        </div>
-                        <div class="custom-control custom-switch" align="left">
-                            <input type="checkbox" class="custom-control-input" id="user-accountNonExpired">
-                            <label class="custom-control-label" for="user-accountNonExpired" style="font-weight: bold">Is account non expired</label>
-                        </div>
-                        <div class="custom-control custom-switch" align="left">
-                            <input type="checkbox" class="custom-control-input" id="user-accountNonLocked">
-                            <label class="custom-control-label" for="user-accountNonLocked" style="font-weight: bold">Is account non locked</label>
-                        </div>
-                        <div class="custom-control custom-switch" align="left">
-                            <input type="checkbox" class="custom-control-input" id="user-credentialsNonExpired">
-                            <label class="custom-control-label" for="user-credentialsNonExpired" style="font-weight: bold">Is credentials non expired</label>
-                        </div>
-                        <div class="custom-control custom-switch" align="left">
-                            <input type="checkbox" class="custom-control-input" id="user-enabled">
-                            <label class="custom-control-label" for="user-enabled" style="font-weight: bold">Is enabled</label>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit"></button>
-                        </div>
-                    </form>
-                </div>
+                <div class="modal-body"></div>
             </div>
         </div>
     </div>
+
+    <!--Form for User-->
+    <form id="user-form" hidden="true">
+        <div class="form-group">
+            <label for="user-id" style="font-weight: bold">ID</label>
+            <input type="text" class="form-control" id="user-id" name="id">
+        </div>
+        <div class="form-group">
+            <label for="user-username" style="font-weight: bold">Username</label>
+            <input type="text" class="form-control" id="user-username" name="username">
+        </div>
+        <div class="form-group">
+            <label for="user-password" style="font-weight: bold">Password</label>
+            <input type="password" class="form-control" id="user-password" name="password">
+        </div>
+        <div class="form-group">
+            <label for="user-confirmPassword" style="font-weight: bold">Confirm password</label>
+            <input type="password" class="form-control" id="user-confirmPassword" name="confirmPassword">
+        </div>
+        <div class="form-group">
+            <label for="user-authorities" style="font-weight: bold">Roles:</label>
+            <select class="custom-select" id="user-authorities" name="authorities" multiple></select>
+        </div>
+        <div class="custom-control custom-switch" align="left">
+            <input type="checkbox" class="custom-control-input" id="user-accountNonExpired">
+            <label class="custom-control-label" for="user-accountNonExpired" style="font-weight: bold">Is account non expired</label>
+        </div>
+        <div class="custom-control custom-switch" align="left">
+            <input type="checkbox" class="custom-control-input" id="user-accountNonLocked">
+            <label class="custom-control-label" for="user-accountNonLocked" style="font-weight: bold">Is account non locked</label>
+        </div>
+        <div class="custom-control custom-switch" align="left">
+            <input type="checkbox" class="custom-control-input" id="user-credentialsNonExpired">
+            <label class="custom-control-label" for="user-credentialsNonExpired" style="font-weight: bold">Is credentials non expired</label>
+        </div>
+        <div class="custom-control custom-switch" align="left">
+            <input type="checkbox" class="custom-control-input" id="user-enabled">
+            <label class="custom-control-label" for="user-enabled" style="font-weight: bold">Is enabled</label>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit"></button>
+        </div>
+    </form>
 
     <script type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="webjars/popper.js/1.16.0/popper.min.js"></script>
