@@ -91,7 +91,7 @@ function updateUsersTable(allUsers, allAuthorities) {
                         'type': 'button',
                         'class': 'btn btn-danger',
                         'data-toggle': 'modal',
-                        'data-target': '#user-modal',
+                        'data-target': '#user-modal'
                     })
                     .data('user', user)
                 )
