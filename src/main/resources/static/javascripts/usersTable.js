@@ -93,7 +93,7 @@ function updateUsersTable(allUsers, allAuthorities) {
                         'data-toggle': 'modal',
                         'data-target': '#delete-user-modal',
                     })
-                    .data('user', JSON.stringify(user))
+                    .data('user', user)
             )
         )
     })
