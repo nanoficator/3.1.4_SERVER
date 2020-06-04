@@ -53,25 +53,21 @@ function deleteUserModal(user) {
     $('#user-accountNonExpired')
         .attr({
             'checked': user.accountNonExpired,
-            'value': user.accountNonExpired,
             'disabled': true,
         });
     $('#user-accountNonLocked')
         .attr({
             'checked': user.accountNonLocked,
-            'value': user.accountNonLocked,
             'disabled': true,
         });
     $('#user-credentialsNonExpired')
         .attr({
             'checked': user.credentialsNonExpired,
-            'value' : user.credentialsNonExpired,
             'disabled': true,
         });
     $('#user-enabled')
         .attr({
             'checked': user.enabled,
-            'value': user.enabled,
             'disabled': true,
         });
     $('#user-form :submit')
