@@ -217,19 +217,19 @@
             <select class="custom-select" id="user-authorities" name="authorities" multiple></select>
         </div>
         <div class="custom-control custom-switch" align="left">
-            <input type="checkbox" class="custom-control-input" id="user-accountNonExpired">
+            <input type="checkbox" class="custom-control-input" id="user-accountNonExpired" name="accountNonExpired">
             <label class="custom-control-label" for="user-accountNonExpired" style="font-weight: bold">Is account non expired</label>
         </div>
         <div class="custom-control custom-switch" align="left">
-            <input type="checkbox" class="custom-control-input" id="user-accountNonLocked">
+            <input type="checkbox" class="custom-control-input" id="user-accountNonLocked" name="accountNonLocked">
             <label class="custom-control-label" for="user-accountNonLocked" style="font-weight: bold">Is account non locked</label>
         </div>
         <div class="custom-control custom-switch" align="left">
-            <input type="checkbox" class="custom-control-input" id="user-credentialsNonExpired">
+            <input type="checkbox" class="custom-control-input" id="user-credentialsNonExpired" name="credentialsNonExpired">
             <label class="custom-control-label" for="user-credentialsNonExpired" style="font-weight: bold">Is credentials non expired</label>
         </div>
         <div class="custom-control custom-switch" align="left">
-            <input type="checkbox" class="custom-control-input" id="user-enabled">
+            <input type="checkbox" class="custom-control-input" id="user-enabled" name="enabled">
             <label class="custom-control-label" for="user-enabled" style="font-weight: bold">Is enabled</label>
         </div>
         <div class="modal-footer">
@@ -243,7 +243,7 @@
     <script type="text/javascript" src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
     <div th:if="${isAdmin}">
-        <script type="text/javascript" src="javascripts/addUser.js"></script>
+        <script type="text/javascript" src="javascripts/ajax.js"></script>
         <script type="text/javascript" src="javascripts/usersTable.js"></script>
         <script type="text/javascript" src="javascripts/buildUserModal.js"></script>
         <script type="text/javascript" src="javascripts/actionUser.js"></script>

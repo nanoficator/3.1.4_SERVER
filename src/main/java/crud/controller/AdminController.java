@@ -49,14 +49,20 @@ public class AdminController {
     }
 
     @GetMapping("/users-table")
-    public ResponseEntity<Collection<User>> allUsers() {
+    public ResponseEntity<Collection<User>> getAllUsers() {
         Collection<User> allUsers = userService.getAllUsers();
         return new ResponseEntity<Collection<User>>(allUsers, HttpStatus.OK);
     }
 
     @GetMapping("/authorities")
-    public ResponseEntity<Collection<Authority>> allAuthorities() {
+    public ResponseEntity<Collection<Authority>> getAllAuthorities() {
         Collection<Authority> allAuthorities = authorityService.getAllAuthorities();
         return new ResponseEntity<Collection<Authority>>(allAuthorities, HttpStatus.OK);
+    }
+
+    @GetMapping("/authority-by-id")
+    public ResponseEntity<Authority> getAuthorityById(@RequestBody Long id) {
+        Authority authority = authorityService.getAuthorityById(id);
+        return new ResponseEntity<Authority>(authority, HttpStatus.OK);
     }
 }
