@@ -24,13 +24,13 @@ function getAllAuthorities() {
     return allAuthorities;
 }
 
-function getAuthorityById(id) {
+function getAuthorityByName(name) {
     let authority;
     $.ajax({
-        url: '/admin/authority-by-id',
+        url: '/admin/authority-by-name',
         type: 'get',
         async: false,
-        data: id,
+        data: name,
         success: function (data) {
             authority = JSON.parse(JSON.stringify(data));
         }

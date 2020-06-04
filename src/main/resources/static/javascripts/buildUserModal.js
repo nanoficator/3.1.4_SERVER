@@ -45,7 +45,8 @@ function deleteUserModal(user) {
                     $('<option>')
                         .text(authority.name.substring(5))
                         .attr({
-                            'value' : authority
+                            'value' : authority.name,
+                            'name' : 'role'
                         })
                 )
             })

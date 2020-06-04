@@ -60,9 +60,9 @@ public class AdminController {
         return new ResponseEntity<Collection<Authority>>(allAuthorities, HttpStatus.OK);
     }
 
-    @GetMapping("/authority-by-id")
-    public ResponseEntity<Authority> getAuthorityById(@RequestBody Long id) {
-        Authority authority = authorityService.getAuthorityById(id);
+    @GetMapping("/authority-by-name")
+    public ResponseEntity<Authority> getAuthorityById(@RequestBody String name) {
+        Authority authority = authorityService.getAuthorityByName(name);
         return new ResponseEntity<Authority>(authority, HttpStatus.OK);
     }
 }
