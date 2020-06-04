@@ -1,11 +1,7 @@
 $('#user-form').submit(
     function (event) {
         event.preventDefault();
-        let formData = $("#user-form").serializeArray();
-        let user = {};
-        $(formData).each(function (index, obj) {
-            user[obj.name] = obj.value;
-        });
+        let user = serializeFormToUser($(this));
         let action = '';
         if (action == 'delete') {
             deleteUser(user);
@@ -42,4 +38,14 @@ function editUser(user) {
             alert('error');
         }
     })
+}
+
+function serializeFormToUser(form) {
+    $(form).find(':disabled').removeAttr('disabled')
+    let formData = form.serializeArray();
+    let user = {};
+    $(formData).each(function (index, obj) {
+        user[obj.name] = obj.value;
+    });
+    return user;
 }

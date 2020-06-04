@@ -14,7 +14,7 @@ function deleteUserModal(user) {
         .append(
             $('#user-form')
                 .attr({
-                    'hidden' : false
+                    'hidden' : false,
                 })
         );
     $('#user-id')
