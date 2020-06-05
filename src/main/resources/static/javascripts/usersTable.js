@@ -5,7 +5,7 @@ $(function () {
     );
 });
 
-$('#usersTableTabBtn').on('click', function () {
+$('#usersTableTabBtn').on('click', () => {
     updateUsersTable(
         getAllUsers(),
         getAllAuthorities()
@@ -14,7 +14,7 @@ $('#usersTableTabBtn').on('click', function () {
 
 function updateUsersTable(allUsers) {
     $('#users-table tbody').html('');
-    $(allUsers).each(function (i, user) {
+    $(allUsers).each((i, user) => {
         $('#users-table tbody').append($('<tr>').attr({'id' : 'row-' + user.id})).append(
             $('<td>').text(user.id),
             $('<td>').text(user.username),

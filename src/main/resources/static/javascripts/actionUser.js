@@ -1,5 +1,5 @@
 $('#user-form').submit(
-    function (event) {
+    (event) => {
         event.preventDefault();
         let user = serializeFormToUser($(this));
         let action = '';
@@ -17,10 +17,10 @@ function deleteUser(user) {
         url: '/admin/delete-user',
         data: user,
         type: 'post',
-        success: function (data) {
+        success: (data) => {
             alert(data);
         },
-        error: function () {
+        error: () => {
             alert('error');
         }
     })
@@ -31,10 +31,10 @@ function editUser(user) {
         url: '/admin/edit-user',
         data: user,
         type: 'post',
-        success: function (data) {
+        success: (data) => {
             alert(data);
         },
-        error: function () {
+        error: () => {
             alert('error');
         }
     })
@@ -44,11 +44,13 @@ function serializeFormToUser(form) {
     $(form).find(':disabled').removeAttr('disabled')
     let formData = form.serializeArray();
     let user = {};
-    $(formData).each(function(index, obj){
-        user[obj.name] = obj.value;
-    });
+    $(formData).each(
+        (index, obj) => {
+            user[obj.name] = obj.value;
+        }
+    );
     $(form).find(':checkbox').each(
-        function () {(
+        () => {(
             this.checked ? user[this.name] = true : user[this.name] = false
         )}
     );

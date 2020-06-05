@@ -1,4 +1,4 @@
-$('#modal-window').on('show.bs.modal', function (event) {
+$('#modal-window').on('show.bs.modal', (event) => {
     let user = $(event.relatedTarget).data('user');
     let action = $(event.relatedTarget).data('action');
     buildModalUser(user, action);
@@ -43,10 +43,10 @@ function buildModalUser(user, action) {
     $('#user-authorities').html('');
     let allAuthorities = getAllAuthorities();
     $(allAuthorities).each(
-        function (i, authority) {
+        (i, authority) => {
             let userHasAuthority = false;
             $(user.authorities).each(
-                function (j, userAuthority) {
+                (j, userAuthority) => {
                     if (userAuthority.name == authority.name && userAuthority.id == authority.id) {
                         userHasAuthority = true;
                     }

@@ -4,7 +4,7 @@ function getAllUsers() {
         url: '/admin/all-users',
         type: 'get',
         async: false,
-        success: function (data) {
+        success: (data) => {
             allUsers = JSON.parse(JSON.stringify(data));
         }
     });
@@ -17,7 +17,7 @@ function getAllAuthorities() {
         url: '/admin/all-authorities',
         type: 'get',
         async: false,
-        success: function (data) {
+        success: (data) => {
             allAuthorities = JSON.parse(JSON.stringify(data));
         }
     });
@@ -31,7 +31,7 @@ function getAuthorityByName(name) {
         type: 'get',
         async: false,
         data: name,
-        success: function (data) {
+        success: (data) => {
             authority = JSON.parse(JSON.stringify(data));
         }
     });
