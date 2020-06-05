@@ -1,7 +1,7 @@
 function getAllUsers() {
     let allUsers;
     $.ajax({
-        url: '/admin/users-table',
+        url: '/admin/all-users',
         type: 'get',
         async: false,
         success: function (data) {
@@ -14,7 +14,7 @@ function getAllUsers() {
 function getAllAuthorities() {
     let allAuthorities;
     $.ajax({
-        url: '/admin/authorities',
+        url: '/admin/all-authorities',
         type: 'get',
         async: false,
         success: function (data) {

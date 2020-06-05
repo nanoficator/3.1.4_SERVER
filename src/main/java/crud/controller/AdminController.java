@@ -48,13 +48,13 @@ public class AdminController {
         return new ResponseEntity<String >("test", HttpStatus.OK);
     }
 
-    @GetMapping("/users-table")
+    @GetMapping("/all-users")
     public ResponseEntity<Collection<User>> getAllUsers() {
         Collection<User> allUsers = userService.getAllUsers();
         return new ResponseEntity<Collection<User>>(allUsers, HttpStatus.OK);
     }
 
-    @GetMapping("/authorities")
+    @GetMapping("/all-authorities")
     public ResponseEntity<Collection<Authority>> getAllAuthorities() {
         Collection<Authority> allAuthorities = authorityService.getAllAuthorities();
         return new ResponseEntity<Collection<Authority>>(allAuthorities, HttpStatus.OK);
