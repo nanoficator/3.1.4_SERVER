@@ -1,12 +1,14 @@
 $('#modal-window').on('show.bs.modal', (event) => {
-    let user = $(event.relatedTarget).data('user');
-    let action = $(event.relatedTarget).data('action');
-    buildModalUser(user, action);
+    buildModalUser(
+        $(event.relatedTarget).data('user'),
+        $(event.relatedTarget).data('action')
+    );
 });
 
 function buildModalUser(user, action) {
 
-    let disabledForm = (action == 'Delete' ? true : false);
+    let actionIsDelete = (action == 'Delete' ? true : false);
+    let actionIsAdd = (action == 'Add' ? true : false);
 
     $('#modal-window .modal-title').text(action + ' user');
     $('#modal-window .modal-body')
@@ -25,70 +27,76 @@ function buildModalUser(user, action) {
     $('#user-username')
         .attr({
             'value': user.username,
-            'disabled': disabledForm,
+            'disabled': actionIsDelete,
+            'required' : true
         });
     $('#user-password')
         .attr({
-            'disabled': disabledForm,
+            'placeholder' : (actionIsDelete ? '' : 'Type new password if necessary'),
+            'disabled': actionIsDelete,
+            'required' : actionIsAdd
         })
-        .removeAttr('placeholder');
+        .removeAttr('value')
     $('#user-confirmPassword')
         .attr({
-            'disabled': disabledForm,
+            'placeholder' : (actionIsDelete ? '' : 'Re-type new password if necessary'),
+            'disabled' : actionIsDelete,
+            'required' : actionIsAdd
         })
-        .removeAttr('placeholder');
+        .removeAttr('value')
     $('#user-authorities')
         .attr({
-            'disabled': disabledForm,
+            'disabled': actionIsDelete,
+            'required' : true
         })
-    $('#user-authorities').html('');
-    let allAuthorities = getAllAuthorities();
-    $(allAuthorities).each(
-        (i, authority) => {
-            let userHasAuthority = false;
-            $(user.authorities).each(
-                (j, userAuthority) => {
-                    if (userAuthority.name == authority.name && userAuthority.id == authority.id) {
-                        userHasAuthority = true;
+        $('#user-authorities').html('');
+        let allAuthorities = getAllAuthorities();
+        $(allAuthorities).each(
+            (i, authority) => {
+                let userHasAuthority = false;
+                $(user.authorities).each(
+                    (j, userAuthority) => {
+                        if (userAuthority.name == authority.name && userAuthority.id == authority.id) {
+                            userHasAuthority = true;
+                        }
                     }
-                }
-            )
-            $('#user-authorities').append(
-                $('<option>')
-                    .text(authority.name.substring(5))
-                    .attr({
-                        'data-id': authority.id,
-                        'data-name': authority.name,
-                        'data-authority': authority.authority,
-                        'selected' : userHasAuthority
-                    })
-            )
-        }
-    )
+                )
+                $('#user-authorities').append(
+                    $('<option>')
+                        .text(authority.name.substring(5))
+                        .attr({
+                            'data-id': authority.id,
+                            'data-name': authority.name,
+                            'data-authority': authority.authority,
+                            'selected' : userHasAuthority
+                        })
+                )
+            }
+        )
     $('#user-accountNonExpired')
         .attr({
             'checked': user.accountNonExpired,
-            'disabled': disabledForm,
+            'disabled': actionIsDelete,
         });
     $('#user-accountNonLocked')
         .attr({
             'checked': user.accountNonLocked,
-            'disabled': disabledForm,
+            'disabled': actionIsDelete,
         });
     $('#user-credentialsNonExpired')
         .attr({
             'checked': user.credentialsNonExpired,
-            'disabled': disabledForm,
+            'disabled': actionIsDelete,
         });
     $('#user-enabled')
         .attr({
             'checked': user.enabled,
-            'disabled': disabledForm,
+            'disabled': actionIsDelete,
         });
     $('#user-form :submit')
         .text(action)
         .attr({
-            'class': (disabledForm ? 'btn btn-danger' : 'btn btn-info')
+            'class': (actionIsDelete ? 'btn btn-danger' : 'btn btn-info')
         })
 
 }

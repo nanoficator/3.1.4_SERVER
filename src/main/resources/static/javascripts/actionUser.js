@@ -9,6 +9,7 @@ $('#user-form').submit(
             editUser(user);
         }
         $('#modal-window').modal('hide');
+        $('#users-table-tab-btn').trigger('click');
     }
 )
 

@@ -43,9 +43,9 @@ public class AdminController {
     }
 
     @PostMapping("/edit-user")
-    public String editUser(@ModelAttribute User user) {
-        userService.editUser(user);
-        return "redirect:/";
+    public ResponseEntity<String> editUser(@RequestBody User user) {
+        String result = userService.editUser(user);
+        return new ResponseEntity<String>(result, HttpStatus.OK);
     }
 
     @PostMapping(value = "/delete-user")

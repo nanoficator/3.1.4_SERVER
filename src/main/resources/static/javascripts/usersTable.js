@@ -2,7 +2,7 @@ $(function () {
     updateUsersTable(getAllUsers());
 });
 
-$('#usersTableTabBtn').on('click', function() {
+$('#users-table-tab-btn').on('click', function() {
     updateUsersTable(getAllUsers());
 });
 
