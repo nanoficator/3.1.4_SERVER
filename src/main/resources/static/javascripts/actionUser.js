@@ -41,7 +41,6 @@ function editUser(user) {
 }
 
 function serializeFormToUser(form) {
-
     $(form).find(':disabled').removeAttr('disabled')
     let formData = form.serializeArray();
     let user = {};
