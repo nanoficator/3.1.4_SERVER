@@ -6,10 +6,7 @@ $(function () {
 });
 
 $('#usersTableTabBtn').on('click', () => {
-    updateUsersTable(
-        getAllUsers(),
-        getAllAuthorities()
-    );
+    updateUsersTable(getAllUsers());
 });
 
 function updateUsersTable(allUsers) {

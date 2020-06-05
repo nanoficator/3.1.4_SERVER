@@ -41,18 +41,30 @@ function editUser(user) {
 }
 
 function serializeFormToUser(form) {
+
     $(form).find(':disabled').removeAttr('disabled')
     let formData = form.serializeArray();
     let user = {};
+
     $(formData).each(
         (index, obj) => {
             user[obj.name] = obj.value;
         }
     );
+
     $(form).find(':checkbox').each(
-        () => {(
-            this.checked ? user[this.name] = true : user[this.name] = false
+        function () {(
+            user[this.name] = (this.checked ? true : false)
         )}
     );
+
+    let authorities = [];
+    $('#user-authorities').find('option').each(
+        function(i, option) {
+            authorities[i] = {id: option.dataset.id, name: option.dataset.name, authority: option.dataset.authority};
+        }
+    );
+    user['authorities'] = authorities;
     return user;
+
 }

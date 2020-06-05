@@ -56,7 +56,9 @@ function buildModalUser(user, action) {
                 $('<option>')
                     .text(authority.name.substring(5))
                     .attr({
-                        'value' : authority.name,
+                        'data-id': authority.id,
+                        'data-name': authority.name,
+                        'data-authority': authority.authority,
                         'selected' : userHasAuthority
                     })
             )
