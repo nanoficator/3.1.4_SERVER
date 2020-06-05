@@ -9,6 +9,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
 
+    <!-- CSRF-protection -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+
     <title>
         Main page
     </title>

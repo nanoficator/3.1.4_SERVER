@@ -1,3 +1,9 @@
+$.ajaxSetup({
+    beforeSend: function(xhr) {
+        xhr.setRequestHeader($('#_csrf_header').attr('content'), $('#_csrf').attr('content'));
+    }
+});
+
 function getAllUsers() {
     let allUsers;
     $.ajax({
