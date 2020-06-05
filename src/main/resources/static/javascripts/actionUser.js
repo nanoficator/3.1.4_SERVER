@@ -45,7 +45,6 @@ function serializeFormToUser(form) {
     $(form).find(':disabled').removeAttr('disabled')
     let formData = form.serializeArray();
     let user = {};
-
     $(formData).each(
         (index, obj) => {
             user[obj.name] = obj.value;
