@@ -1,7 +1,8 @@
 $.ajaxSetup({
     beforeSend: function(xhr) {
         xhr.setRequestHeader($('#_csrf_header').attr('content'), $('#_csrf').attr('content'));
-    }
+    },
+    contentType: 'application/json'
 });
 
 function getAllUsers() {
@@ -33,7 +34,7 @@ function getAllAuthorities() {
 function deleteUser(user) {
     $.ajax({
         url: '/admin/delete-user',
-        data: user,
+        data: JSON.stringify(user),
         type: 'post',
         success: function (data) {
             alert(data);
@@ -47,7 +48,7 @@ function deleteUser(user) {
 function editUser(user) {
     $.ajax({
         url: '/admin/edit-user',
-        data: user,
+        data: JSON.stringify(user),
         type: 'post',
         success: function (data) {
             alert(data);
