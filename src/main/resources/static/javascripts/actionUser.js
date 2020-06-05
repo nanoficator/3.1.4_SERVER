@@ -60,7 +60,7 @@ function serializeFormToUser(form) {
 
     let authorities = [];
     $('#user-authorities').find('option').each(
-        function(i, option) {
+        (i, option) => {
             authorities[i] = {id: option.dataset.id, name: option.dataset.name, authority: option.dataset.authority};
         }
     );
