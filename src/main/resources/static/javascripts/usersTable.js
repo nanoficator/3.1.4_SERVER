@@ -1,11 +1,8 @@
 $(function () {
-    updateUsersTable(
-        getAllUsers(),
-        getAllAuthorities()
-    );
+    updateUsersTable(getAllUsers());
 });
 
-$('#usersTableTabBtn').on('click', () => {
+$('#usersTableTabBtn').on('click', function() {
     updateUsersTable(getAllUsers());
 });
 

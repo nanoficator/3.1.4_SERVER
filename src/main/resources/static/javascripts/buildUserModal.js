@@ -14,6 +14,7 @@ function buildModalUser(user, action) {
             $('#user-form')
                 .attr({
                     'hidden' : false,
+                    'data-action' : action
                 })
         );
     $('#user-id')
@@ -87,8 +88,7 @@ function buildModalUser(user, action) {
     $('#user-form :submit')
         .text(action)
         .attr({
-            'class': (disabledForm ? 'btn btn-danger' : 'btn btn-info'),
-            'name' : action
+            'class': (disabledForm ? 'btn btn-danger' : 'btn btn-info')
         })
 
 }

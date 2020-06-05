@@ -5,7 +5,7 @@ function getAllUsers() {
         type: 'get',
         async: false,
         success: (data) => {
-            allUsers = JSON.parse(JSON.stringify(data));
+            allUsers = data;
         }
     });
     return allUsers;
@@ -18,22 +18,36 @@ function getAllAuthorities() {
         type: 'get',
         async: false,
         success: (data) => {
-            allAuthorities = JSON.parse(JSON.stringify(data));
+            allAuthorities = data;
         }
     });
     return allAuthorities;
 }
 
-function getAuthorityByName(name) {
-    let authority;
+function deleteUser(user) {
     $.ajax({
-        url: '/admin/authority-by-name',
-        type: 'get',
-        async: false,
-        data: name,
-        success: (data) => {
-            authority = JSON.parse(JSON.stringify(data));
+        url: '/admin/delete-user',
+        data: user,
+        type: 'post',
+        success: function (data) {
+            alert(data);
+        },
+        error: function () {
+            alert('error');
         }
-    });
-    return authority;
+    })
+}
+
+function editUser(user) {
+    $.ajax({
+        url: '/admin/edit-user',
+        data: user,
+        type: 'post',
+        success: function (data) {
+            alert(data);
+        },
+        error: function () {
+            alert('error');
+        }
+    })
 }
