@@ -1,5 +1,5 @@
 $('#user-form').submit(
-    (event) => {
+    function (event) {
         event.preventDefault();
         let user = serializeFormToUser($(this));
         let action = '';
@@ -17,10 +17,10 @@ function deleteUser(user) {
         url: '/admin/delete-user',
         data: user,
         type: 'post',
-        success: (data) => {
+        success: function (data) {
             alert(data);
         },
-        error: () => {
+        error: function () {
             alert('error');
         }
     })
@@ -31,10 +31,10 @@ function editUser(user) {
         url: '/admin/edit-user',
         data: user,
         type: 'post',
-        success: (data) => {
+        success: function (data) {
             alert(data);
         },
-        error: () => {
+        error: function () {
             alert('error');
         }
     })
