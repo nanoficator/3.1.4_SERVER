@@ -55,7 +55,7 @@ function updateUsersTable(allUsers) {
                         'class': 'btn btn-info',
                         'data-toggle': 'modal',
                         'data-target': '#modal-window',
-                        'data-action' : 'edit'
+                        'data-action' : 'Edit'
                     })
                     .data('user', user)
                 ),
@@ -67,7 +67,7 @@ function updateUsersTable(allUsers) {
                         'class': 'btn btn-danger',
                         'data-toggle': 'modal',
                         'data-target': '#modal-window',
-                        'data-action' : 'delete'
+                        'data-action' : 'Delete'
                     })
                     .data('user', user)
                 )
