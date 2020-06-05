@@ -67,7 +67,7 @@ function serializeFormToUser(form) {
             };
         }
     );
-    user['authorities'] = authorities;
-    return user;
+    user.authorities = authorities;
 
+    return user;
 }
