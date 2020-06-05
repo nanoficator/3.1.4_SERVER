@@ -41,21 +41,16 @@ function editUser(user) {
 }
 
 function serializeFormToUser(form) {
+    $(form).find(':disabled').removeAttr('disabled')
+    let formData = form.serializeArray();
     let user = {};
+    $(formData).each(function(index, obj){
+        user[obj.name] = obj.value;
+    });
     $(form).find(':checkbox').each(
-        function () {
-            (this.checked ? user[this.name] = true : user[this.name] = false)
-        }
-    )
-    $(form).find(':text').each(
-        function() {
-            user[this.name] = this.value;
-        }
-    )
-    $(form).find(':password').each(
-        function() {
-            user[this.name] = this.value;
-        }
-    )
+        function () {(
+            this.checked ? user[this.name] = true : user[this.name] = false
+        )}
+    );
     return user;
 }
