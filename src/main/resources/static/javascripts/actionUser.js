@@ -3,11 +3,8 @@ $('#user-form').submit(
         event.preventDefault();
         let user = serializeFormToUser($(this));
         let action = this.dataset.action;
-        if (action == 'Delete') {
-            deleteUser(user);
-        } else if (action == 'Edit') {
-            editUser(user);
-        }
+        let message = (action == 'Delete' ? deleteUser(user) : editUser(user))
+        console.log(message);
         $('#modal-window').modal('hide');
         $('#users-table-tab-btn').trigger('click');
     }

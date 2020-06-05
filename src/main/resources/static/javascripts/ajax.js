@@ -36,6 +36,7 @@ function deleteUser(user) {
         url: '/admin/delete-user',
         data: JSON.stringify(user),
         type: 'post',
+        async: false,
         success: function (data) {
             alert(data);
         },
@@ -46,15 +47,18 @@ function deleteUser(user) {
 }
 
 function editUser(user) {
+    let message;
     $.ajax({
         url: '/admin/edit-user',
         data: JSON.stringify(user),
         type: 'post',
+        async: false,
         success: function (data) {
-            alert(data);
+            message = data;
         },
         error: function () {
-            alert('error');
+            alert('Oops! Something was wrong...')
         }
     })
+    return message;
 }
