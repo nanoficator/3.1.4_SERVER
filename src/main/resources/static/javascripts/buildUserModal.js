@@ -83,7 +83,7 @@ function buildModalUser(user, action) {
             'disabled': disabledForm,
         });
     $('#user-form :submit')
-        .text('Delete')
+        .text(action)
         .attr({
             'class': (disabledForm ? 'btn btn-danger' : 'btn btn-info'),
             'name' : action
