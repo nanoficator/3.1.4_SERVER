@@ -43,10 +43,11 @@ function deleteUser(user) {
             alert(message);
         },
         error: function (data) {
-            message = data
+            message = data.responseText;
             alert(message);
         }
     })
+    return message;
 }
 
 function editUser(user) {
@@ -57,11 +58,11 @@ function editUser(user) {
         type: 'post',
         async: false,
         success: function (data) {
-            message = data.responseText
+            message = data;
             alert(message);
         },
         error: function (data) {
-            message = data.responseText
+            message = data.responseText;
             alert(message);
         }
     })
@@ -80,7 +81,7 @@ function addUser(user) {
             alert(message);
         },
         error: function (data) {
-            message = data.responseText
+            message = data.responseText;
             alert(message);
         }
     })

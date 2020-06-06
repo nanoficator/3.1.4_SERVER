@@ -49,7 +49,8 @@ public class AdminController {
             return new ResponseEntity<String >(result, HttpStatus.BAD_REQUEST);
         } else {
             return new ResponseEntity<String>(result, HttpStatus.OK);
-        }    }
+        }
+    }
 
     @PostMapping(value = "/delete-user")
     public ResponseEntity<String> deleteUser(@RequestBody User user) {
@@ -58,7 +59,8 @@ public class AdminController {
             return new ResponseEntity<String >(result, HttpStatus.BAD_REQUEST);
         } else {
             return new ResponseEntity<String>(result, HttpStatus.OK);
-        }    }
+        }
+    }
 
     @GetMapping("/all-users")
     public ResponseEntity<Collection<User>> getAllUsers() {
