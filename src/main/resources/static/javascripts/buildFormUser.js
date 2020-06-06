@@ -1,24 +1,8 @@
-$('#modal-window').on('show.bs.modal', (event) => {
-    buildModalUser(
-        $(event.relatedTarget).data('user'),
-        $(event.relatedTarget).data('action')
-    );
-});
-
-function buildModalUser(user, action) {
-
+function buildFormUser(user, action) {
     let actionIsDelete = (action == 'Delete' ? true : false);
     let actionIsAdd = (action == 'Add' ? true : false);
+    let actionIsEdit = (action == 'Edit' ? true : false);
 
-    $('#modal-window .modal-title').text(action + ' user');
-    $('#modal-window .modal-body')
-        .append(
-            $('#user-form')
-                .attr({
-                    'hidden' : false,
-                    'data-action' : action
-                })
-        );
     $('#user-id')
         .attr({
             'value': user.id,
@@ -49,30 +33,30 @@ function buildModalUser(user, action) {
             'disabled': actionIsDelete,
             'required' : true
         })
-        $('#user-authorities').html('');
-        let allAuthorities = getAllAuthorities();
-        $(allAuthorities).each(
-            (i, authority) => {
-                let userHasAuthority = false;
-                $(user.authorities).each(
-                    (j, userAuthority) => {
-                        if (userAuthority.name == authority.name && userAuthority.id == authority.id) {
-                            userHasAuthority = true;
-                        }
+    $('#user-authorities').html('');
+    let allAuthorities = getAllAuthorities();
+    $(allAuthorities).each(
+        (i, authority) => {
+            let userHasAuthority = false;
+            $(user.authorities).each(
+                (j, userAuthority) => {
+                    if (userAuthority.name == authority.name && userAuthority.id == authority.id) {
+                        userHasAuthority = true;
                     }
-                )
-                $('#user-authorities').append(
-                    $('<option>')
-                        .text(authority.name.substring(5))
-                        .attr({
-                            'data-id': authority.id,
-                            'data-name': authority.name,
-                            'data-authority': authority.authority,
-                            'selected' : userHasAuthority
-                        })
-                )
-            }
-        )
+                }
+            )
+            $('#user-authorities').append(
+                $('<option>')
+                    .text(authority.name.substring(5))
+                    .attr({
+                        'data-id': authority.id,
+                        'data-name': authority.name,
+                        'data-authority': authority.authority,
+                        'selected' : userHasAuthority
+                    })
+            )
+        }
+    )
     $('#user-accountNonExpired')
         .attr({
             'checked': user.accountNonExpired,
@@ -98,5 +82,4 @@ function buildModalUser(user, action) {
         .attr({
             'class': (actionIsDelete ? 'btn btn-danger' : 'btn btn-info')
         })
-
 }
