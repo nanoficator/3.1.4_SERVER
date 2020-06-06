@@ -1,8 +1,11 @@
 $('#user-form').submit(
     function (event) {
+
         event.preventDefault();
+
         let user = serializeFormToUser($(this));
         let action = this.dataset.action;
+
         let message;
         if (action == 'Delete') {
             message = deleteUser(user);
@@ -11,9 +14,16 @@ $('#user-form').submit(
         } else if (action == 'Add') {
             message = addUser(user);
         }
+
         console.log(message);
-        $('#modal-window').modal('hide');
-        $('#users-table-tab-btn').trigger('click');
+
+        if (message.includes('Error')) {
+            $('#user-id').attr({'disabled' : true});
+        } else {
+            $('#modal-window').modal('hide');
+            $('#users-table-tab-btn').trigger('click');
+        }
+
     }
 )
 

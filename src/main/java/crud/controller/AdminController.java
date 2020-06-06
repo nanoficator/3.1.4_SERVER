@@ -45,14 +45,20 @@ public class AdminController {
     @PostMapping("/edit-user")
     public ResponseEntity<String> editUser(@RequestBody User user) {
         String result = userService.editUser(user);
-        return new ResponseEntity<String>(result, HttpStatus.OK);
-    }
+        if (result.contains("Error")) {
+            return new ResponseEntity<String >(result, HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<String>(result, HttpStatus.OK);
+        }    }
 
     @PostMapping(value = "/delete-user")
     public ResponseEntity<String> deleteUser(@RequestBody User user) {
         String result = userService.deleteUserById(user.getId());
-        return new ResponseEntity<String >(result, HttpStatus.OK);
-    }
+        if (result.contains("Error")) {
+            return new ResponseEntity<String >(result, HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity<String>(result, HttpStatus.OK);
+        }    }
 
     @GetMapping("/all-users")
     public ResponseEntity<Collection<User>> getAllUsers() {

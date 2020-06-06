@@ -3,6 +3,8 @@ function buildFormUser(user, action) {
     let actionIsAdd = (action == 'Add' ? true : false);
     let actionIsEdit = (action == 'Edit' ? true : false);
 
+    $('#user-form')[0].reset();
+
     $('#user-form').attr({
         'hidden' : false,
         'data-action' : action
