@@ -28,11 +28,6 @@ public class MainController {
         User authUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         boolean isAdmin = authUser.getAuthorities().contains(authorityService.getAuthorityByName("ROLE_ADMIN"));
         boolean isUser = authUser.getAuthorities().contains(authorityService.getAuthorityByName("ROLE_USER"));
-        if (isAdmin) {
-            model.addAttribute("allUsers", userService.getAllUsers());
-            model.addAttribute("newUser", new User());
-        }
-        model.addAttribute("allAuthorities", authorityService.getAllAuthorities());
         model.addAttribute("authUser", authUser);
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("isUser", isUser);
