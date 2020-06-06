@@ -9,5 +9,10 @@ function buildCardNewUser() {
     user.username = null;
     user.password = null;
     user.confirmPassword = null;
+    user.authorities = null;
+    user.accountNonExpired = null;
+    user.accountNonLocked = null;
+    user.credentialsNonExpired = null;
+    user.enabled = null;
     buildFormUser(user, 'Add');
 }
