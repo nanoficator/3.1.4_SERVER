@@ -92,47 +92,7 @@
                             <!--Tab "New user"-->
                             <div class="tab-pane fade" id="new-user-tab"  align="center">
                                 <b><h4 class="card-header" align="left">Add new user</h4></b>
-                                <div class="card col-2" align="center">
-                                    <form id="addUserForm">
-                                        <div class="form-group">
-                                            <label for="addUsername" style="font-weight: bold">Username</label>
-                                            <input id="addUsername" type="text" name="username" class="form-control" placeholder="Enter username">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="addPassword" style="font-weight: bold">Password</label>
-                                            <input id="addPassword" type="password" name="password" class="form-control" placeholder="Enter password">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="addConfirmPassword" style="font-weight: bold">Confirm password</label>
-                                            <input id="addConfirmPassword" type="password"  name="confirmPassword" class="form-control" placeholder="Re-enter password">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="addAuthorities" style="font-weight: bold">Choose roles:</label>
-                                            <select id="addAuthorities" name="authorities" class="custom-select" multiple>Select Roles:
-                                                <option th:each="authority : ${allAuthorities}" th:value="${{authority}}" th:text="${authority.name.substring(5)}"/>
-                                            </select>
-                                        </div>
-                                        <div class="custom-control custom-switch" align="left">
-                                            <input id="addAccountNonExpired" name="accountNonExpired" type="checkbox" class="custom-control-input">
-                                            <label class="custom-control-label" for="addAccountNonExpired" style="font-weight: bold">Is account non expired</label>
-                                        </div>
-                                        <div class="custom-control custom-switch" align="left">
-                                            <input id="addAccountNonLocked" name="accountNonLocked" type="checkbox" class="custom-control-input">
-                                            <label class="custom-control-label" for="addAccountNonLocked" style="font-weight: bold">Is account non locked</label>
-                                        </div>
-                                        <div class="custom-control custom-switch" align="left">
-                                            <input id="addCredentialsNonExpired" name="credentialsNonExpired" type="checkbox" class="custom-control-input">
-                                            <label class="custom-control-label" for="addCredentialsNonExpired" style="font-weight: bold">Is credentials non expired</label>
-                                        </div>
-                                        <div class="custom-control custom-switch" align="left">
-                                            <input id="addEnabled" name="enabled" type="checkbox" class="custom-control-input">
-                                            <label class="custom-control-label" for="addEnabled" style="font-weight: bold">Is enabled</label>
-                                        </div>
-                                        <div>
-                                            <button id="addUserBtn" type="button" class="btn btn-outline-success">Submit</button>
-                                        </div>
-                                    </form>
-                                </div>
+                                <div id="add-new-user-card" class="card col-3" align="center"></div>
                             </div>
                         </div>
                     </div>
@@ -249,6 +209,7 @@
     <div th:if="${isAdmin}">
         <script type="text/javascript" src="javascripts/actionUser.js"></script>
         <script type="text/javascript" src="javascripts/ajax.js"></script>
+        <script type="text/javascript" src="javascripts/buildCardNewUser.js"></script>
         <script type="text/javascript" src="javascripts/buildFormUser.js"></script>
         <script type="text/javascript" src="javascripts/buildModalUser.js"></script>
         <script type="text/javascript" src="javascripts/usersTable.js"></script>

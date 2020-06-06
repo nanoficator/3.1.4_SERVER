@@ -7,13 +7,6 @@ $('#modal-window').on('show.bs.modal', (event) => {
 
 function buildModalUser(user, action) {
     $('#modal-window .modal-title').text(action + ' user');
-    $('#modal-window .modal-body')
-        .append(
-            $('#user-form')
-                .attr({
-                    'hidden' : false,
-                    'data-action' : action
-                })
-        );
+    $('#modal-window .modal-body').append($('#user-form'));
     buildFormUser(user, action);
 }

@@ -32,13 +32,13 @@ public class AdminController {
         this.authorityService = authorityService;
     }
 
-    @PostMapping(value = "/add-user",  produces = "application/json")
-    public ResponseEntity<User> addUser(@RequestBody User user) {
+    @PostMapping("/add-user")
+    public ResponseEntity<String> addUser(@RequestBody User user) {
         String result = userService.addUser(user);
         if (result.contains("Error")) {
-            return new ResponseEntity<User>(user, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<String >(result, HttpStatus.BAD_REQUEST);
         } else {
-            return new ResponseEntity<User>(user, HttpStatus.OK);
+            return new ResponseEntity<String>(result, HttpStatus.OK);
         }
     }
 
@@ -50,8 +50,8 @@ public class AdminController {
 
     @PostMapping(value = "/delete-user")
     public ResponseEntity<String> deleteUser(@RequestBody User user) {
-//        String result = userService.deleteUserById(id);
-        return new ResponseEntity<String >("Info from controller", HttpStatus.OK);
+        String result = userService.deleteUserById(user.getId());
+        return new ResponseEntity<String >(result, HttpStatus.OK);
     }
 
     @GetMapping("/all-users")

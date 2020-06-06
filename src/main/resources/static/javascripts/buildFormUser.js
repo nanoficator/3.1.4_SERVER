@@ -3,6 +3,11 @@ function buildFormUser(user, action) {
     let actionIsAdd = (action == 'Add' ? true : false);
     let actionIsEdit = (action == 'Edit' ? true : false);
 
+    $('#user-form').attr({
+        'hidden' : false,
+        'data-action' : action
+    })
+
     $('#user-id')
         .attr({
             'value': user.id,
@@ -77,9 +82,14 @@ function buildFormUser(user, action) {
             'checked': user.enabled,
             'disabled': actionIsDelete,
         });
+    $('#user-form :button')
+        .attr({
+            'hidden' : actionIsAdd
+        })
     $('#user-form :submit')
         .text(action)
         .attr({
-            'class': (actionIsDelete ? 'btn btn-danger' : 'btn btn-info')
+            'class': (actionIsDelete ? 'btn btn-danger' : 'btn btn-info'),
+            "hidden" : false
         })
 }

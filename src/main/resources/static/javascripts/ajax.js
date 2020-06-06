@@ -32,16 +32,19 @@ function getAllAuthorities() {
 }
 
 function deleteUser(user) {
+    let message;
     $.ajax({
         url: '/admin/delete-user',
         data: JSON.stringify(user),
         type: 'post',
         async: false,
         success: function (data) {
-            alert(data);
+            message = data;
+            alert(message);
         },
-        error: function () {
-            alert('error');
+        error: function (data) {
+            message = data
+            alert(message);
         }
     })
 }
@@ -54,10 +57,31 @@ function editUser(user) {
         type: 'post',
         async: false,
         success: function (data) {
-            message = data;
+            message = data.responseText
+            alert(message);
         },
-        error: function () {
-            alert('Oops! Something was wrong...')
+        error: function (data) {
+            message = data.responseText
+            alert(message);
+        }
+    })
+    return message;
+}
+
+function addUser(user) {
+    let message;
+    $.ajax({
+        url: '/admin/add-user',
+        data: JSON.stringify(user),
+        type: 'post',
+        async: false,
+        success: function (data) {
+            message = data;
+            alert(message);
+        },
+        error: function (data) {
+            message = data.responseText
+            alert(message);
         }
     })
     return message;
