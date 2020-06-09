@@ -23,14 +23,14 @@ function buildFormUser(user, action) {
         });
     $('#user-password')
         .attr({
-            'placeholder' : (actionIsDelete ? '' : 'Type new password if necessary'),
+            'placeholder' : (actionIsDelete ? '' : (actionIsAdd ? 'Enter password' : 'Re-type new password if necessary')),
             'disabled': actionIsDelete,
             'required' : actionIsAdd
         })
         .removeAttr('value')
     $('#user-confirmPassword')
         .attr({
-            'placeholder' : (actionIsDelete ? '' : 'Re-type new password if necessary'),
+            'placeholder' : (actionIsDelete ? '' : (actionIsAdd ? 'Re-enter password' : 'Re-type new password if necessary')),
             'disabled' : actionIsDelete,
             'required' : actionIsAdd
         })
