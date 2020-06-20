@@ -17,14 +17,12 @@ public class AuthorityServiceImp implements AuthorityService {
         this.authorityRepository = authorityRepository;
     }
 
+    @Override
     public Collection<Authority> getAllAuthorities() {
         return authorityRepository.findAll();
     }
 
-    public Authority getAuthorityById(Long id) {
-        return authorityRepository.getOne(id);
-    }
-
+    @Override
     public Authority getAuthorityByName(String name) {
         return authorityRepository.findRoleByName(name);
     }
