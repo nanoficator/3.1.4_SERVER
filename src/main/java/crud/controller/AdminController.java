@@ -2,8 +2,9 @@ package crud.controller;
 
 import crud.model.Authority;
 import crud.model.User;
-import crud.service.AuthorityService;
-import crud.service.UserService;
+import crud.service.AuthorityServiceImp;
+import crud.service.UserServiceImp;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,11 +17,12 @@ import java.util.Collection;
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminController {
 
-    private UserService userService;
-    private AuthorityService authorityService;
+    private UserServiceImp userService;
+    private AuthorityServiceImp authorityService;
 
-    public AdminController(UserService userService,
-                          AuthorityService authorityService) {
+    @Autowired
+    public AdminController(UserServiceImp userService,
+                           AuthorityServiceImp authorityService) {
         this.userService = userService;
         this.authorityService = authorityService;
     }
