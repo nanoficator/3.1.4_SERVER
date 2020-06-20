@@ -29,19 +29,25 @@ public class AdminController {
     public ResponseEntity<String> addUser(@RequestBody User user) {
         String result = userService.addUser(user);
         if (result.contains("Error")) {
-            return new ResponseEntity<String >(result, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         } else {
-            return new ResponseEntity<String>(result, HttpStatus.OK);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }
+    }
+
+    @PostMapping("/user-by-username")
+    public ResponseEntity<User> getUserByUsername(@RequestBody String username) {
+        User user = userService.getUserByUsername(username);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PostMapping("/edit-user")
     public ResponseEntity<String> editUser(@RequestBody User user) {
         String result = userService.editUser(user);
         if (result.contains("Error")) {
-            return new ResponseEntity<String >(result, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         } else {
-            return new ResponseEntity<String>(result, HttpStatus.OK);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }
     }
 
@@ -49,27 +55,28 @@ public class AdminController {
     public ResponseEntity<String> deleteUser(@RequestBody User user) {
         String result = userService.deleteUserById(user.getId());
         if (result.contains("Error")) {
-            return new ResponseEntity<String >(result, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(result, HttpStatus.BAD_REQUEST);
         } else {
-            return new ResponseEntity<String>(result, HttpStatus.OK);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }
     }
 
     @GetMapping("/all-users")
     public ResponseEntity<Collection<User>> getAllUsers() {
         Collection<User> allUsers = userService.getAllUsers();
-        return new ResponseEntity<Collection<User>>(allUsers, HttpStatus.OK);
+        return new ResponseEntity<>(allUsers, HttpStatus.OK);
     }
 
     @GetMapping("/all-authorities")
     public ResponseEntity<Collection<Authority>> getAllAuthorities() {
         Collection<Authority> allAuthorities = authorityService.getAllAuthorities();
-        return new ResponseEntity<Collection<Authority>>(allAuthorities, HttpStatus.OK);
+        return new ResponseEntity<>(allAuthorities, HttpStatus.OK);
     }
 
-    @GetMapping("/authority-by-name")
+    @PostMapping("/authority-by-name")
     public ResponseEntity<Authority> getAuthorityById(@RequestBody String name) {
         Authority authority = authorityService.getAuthorityByName(name);
-        return new ResponseEntity<Authority>(authority, HttpStatus.OK);
+        return new ResponseEntity<>(authority, HttpStatus.OK);
     }
+
 }
